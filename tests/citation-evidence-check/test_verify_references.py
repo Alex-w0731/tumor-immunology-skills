@@ -536,7 +536,7 @@ class CommandLine(unittest.TestCase):
         self.tmp.cleanup()
 
     def run_cli(self, *args):
-        return subprocess.run([sys.executable, SCRIPT, *args], capture_output=True, text=True, timeout=60)
+        return subprocess.run([sys.executable, SCRIPT, *args], capture_output=True, text=True, encoding="utf-8", timeout=60)
 
     def test_offline_json_report(self):
         proc = self.run_cli(self.csv, "--offline", self.dir)

@@ -589,6 +589,8 @@ def _split(text):
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     try:
         if args.exact_max < 1:
             raise InputError("--exact-max must be at least 1")

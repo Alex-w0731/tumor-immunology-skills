@@ -536,6 +536,8 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     try:
         if not 0 < args.alpha < 1:
             raise InputError("--alpha must lie strictly between 0 and 1")

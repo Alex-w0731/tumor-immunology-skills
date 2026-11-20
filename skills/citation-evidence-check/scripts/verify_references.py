@@ -862,6 +862,8 @@ def main(argv=None) -> int:
     parser.add_argument("--delay", type=float, default=0.4, help="seconds between requests (default 0.4)")
     parser.add_argument("--timeout", type=float, default=30.0, help="seconds per request (default 30)")
     args = parser.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     try:
         if args.offline and args.save:
             raise InputError("--offline and --save cannot be combined")

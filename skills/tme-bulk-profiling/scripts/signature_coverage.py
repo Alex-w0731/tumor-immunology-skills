@@ -379,6 +379,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     try:
         report = build_report(args.gmt, args.matrix, args.min_coverage, args.min_genes, args.sep, args.orientation)
     except InputError as exc:

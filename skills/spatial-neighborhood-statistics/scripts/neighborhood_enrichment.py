@@ -776,6 +776,8 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     try:
         result = run(args)
     except InputError as exc:

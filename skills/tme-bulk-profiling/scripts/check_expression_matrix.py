@@ -878,6 +878,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # legacy Windows code pages cannot print every character
     if args.max_values < 1 or args.examples < 0:
         print("error: --max-values must be at least 1 and --examples at least 0", file=sys.stderr)
         return 2
