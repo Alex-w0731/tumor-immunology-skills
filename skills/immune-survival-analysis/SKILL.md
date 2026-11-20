@@ -217,7 +217,7 @@ research use only, never a prognosis for an individual patient.
 ## Scripts
 
 Run the scripts; do not read them into context. All take TSV (or CSV if the name ends in
-.csv), need only Python 3.9+, exit with code 2 and a message naming the bad column or line, and
+.csv), need only Python 3.10+, exit with code 2 and a message naming the bad column or line, and
 print `--help`.
 
 - **scripts/km_logrank.py**: Kaplan-Meier [Kaplan1958] with Greenwood log-scale confidence

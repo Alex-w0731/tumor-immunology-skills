@@ -18,4 +18,4 @@ First public release.
 - `tools/check_citations.py`: resolves every cited DOI and PMID at Crossref and PubMed and
   compares the metadata with the entry.
 - `tools/build_catalog.py`: keeps the README catalogs in sync with the skills.
-- Claude Code plugin and marketplace manifests; CI on Python 3.9 to 3.13.
+- Claude Code plugin and marketplace manifests; CI on Python 3.10 to 3.14 (Linux), plus macOS and Windows.

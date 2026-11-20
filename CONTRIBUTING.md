@@ -29,7 +29,7 @@ python3 tools/build_catalog.py            # refresh the catalog tables in both R
 python3 tools/check_citations.py          # resolve every DOI and PMID (needs network)
 ```
 
-No dependencies need to be installed. CI runs the first three on Python 3.9 to 3.13; a separate
+No dependencies need to be installed. CI runs the first three on Python 3.10 to 3.14; a separate
 workflow runs the citation check whenever a bibliography changes.
 
 ## Review checklist

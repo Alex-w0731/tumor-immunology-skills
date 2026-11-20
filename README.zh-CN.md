@@ -11,7 +11,7 @@
   <a href="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/ci.yml"><img src="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/citations.yml"><img src="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/citations.yml/badge.svg" alt="引用可解析" /></a>
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/format-Agent%20Skills-7c5cff" alt="Agent Skills 格式" /></a>
-  <img src="https://img.shields.io/badge/scripts-Python%203.9%2B%20stdlib%20only-3776AB?logo=python&logoColor=white" alt="脚本：Python 3.9+，仅标准库" />
+  <img src="https://img.shields.io/badge/scripts-Python%203.10%2B%20stdlib%20only-3776AB?logo=python&logoColor=white" alt="脚本：Python 3.10+，仅标准库" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2E7EA6" alt="MIT 许可" /></a>
 </p>
 
@@ -120,7 +120,7 @@ python3 skills/immune-survival-analysis/scripts/km_logrank.py --help
 | 层次 | 检查什么 | 在哪里 |
 |---|---|---|
 | 文献出处 | 每个数值阈值、定义和归因说法都带引用键，并能在该技能的 `references/sources.md` 中找到。核查工具会到 Crossref 和 PubMed 解析每个 DOI 与 PMID，并比对年份、第一作者和标题。 | [`tools/check_citations.py`](tools/check_citations.py)，参考文献一有改动就由[工作流](.github/workflows/citations.yml)运行 |
-| 脚本 | 仅标准库；除非声明否则不联网；`--help` 可运行；单元测试的期望值由手工推导或取自已发表的算例。 | [`tools/run_tests.py`](tools/run_tests.py)，CI 覆盖 Python 3.9–3.13（Linux、macOS、Windows） |
+| 脚本 | 仅标准库；除非声明否则不联网；`--help` 可运行；单元测试的期望值由手工推导或取自已发表的算例。 | [`tools/run_tests.py`](tools/run_tests.py)，CI 覆盖 Python 3.10–3.14（Linux、macOS、Windows） |
 | 结构 | frontmatter、行数预算、链接目标、孤立文件、评测目录格式、不含本机路径。 | [`tools/validate_skills.py`](tools/validate_skills.py) |
 | 复核 | 每个技能先由一个 AI 智能体起草，再由另一个独立的智能体复核：重读所引文献、重新计算脚本输出，并修复发现的问题。 | [`docs/verification.md`](docs/verification.md) |
 | 行为 | 每个技能三个评测用例，评分项客观，用于对比“有技能 / 无技能”两种情况。 | `skills/<name>/evals/` |

@@ -212,7 +212,7 @@ at or above its median over all samples; desert = the rest. What follows from it
 
 ## Scripts
 
-Both scripts use only the Python standard library (3.9 or later), are deterministic, and are run,
+Both scripts use only the Python standard library (3.10 or later), are deterministic, and are run,
 not read. Exit status 0 means a report was produced; 2 means unreadable input or a bad argument.
 
 ```bash

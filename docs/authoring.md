@@ -109,7 +109,7 @@ Body, in this order (rename headings only if the content truly needs it):
 
 ## Script rules
 
-- Python >= 3.9, standard library only (no numpy, pandas, scipy). Start with
+- Python >= 3.10, standard library only (no numpy, pandas, scipy). Start with
   `#!/usr/bin/env python3` and a module docstring that includes two usage examples.
 - `argparse` with a helpful `--help`; inputs are TSV / CSV / JSON files with documented column
   names; output is JSON or TSV on stdout, or to `--out`.

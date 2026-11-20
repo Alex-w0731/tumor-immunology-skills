@@ -224,7 +224,7 @@ conventions taken from the owner's breast-cancer-multiomics analysis plan, not p
 ## Scripts
 
 Run the scripts; do not read them into context. Both exit with code 2 and a message naming the
-column, line or value when the input is wrong. Python 3.9 or later, standard library only.
+column, line or value when the input is wrong. Python 3.10 or later, standard library only.
 
 `scripts/pseudobulk_aggregate.py` sums raw counts per sample and cell type, applies
 `--min-cells`, and counts units per group.

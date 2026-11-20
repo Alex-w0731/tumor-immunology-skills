@@ -11,7 +11,7 @@
   <a href="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/ci.yml"><img src="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/citations.yml"><img src="https://github.com/Alex-w0731/tumor-immunology-skills/actions/workflows/citations.yml/badge.svg" alt="Citations resolve" /></a>
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/format-Agent%20Skills-7c5cff" alt="Agent Skills format" /></a>
-  <img src="https://img.shields.io/badge/scripts-Python%203.9%2B%20stdlib%20only-3776AB?logo=python&logoColor=white" alt="Scripts: Python 3.9+, standard library only" />
+  <img src="https://img.shields.io/badge/scripts-Python%203.10%2B%20stdlib%20only-3776AB?logo=python&logoColor=white" alt="Scripts: Python 3.10+, standard library only" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2E7EA6" alt="MIT license" /></a>
 </p>
 
@@ -120,7 +120,7 @@ python3 skills/immune-survival-analysis/scripts/km_logrank.py --help
 | Layer | What is checked | Where |
 |---|---|---|
 | Sources | Every numeric threshold, definition and attributed claim carries a key that resolves in the skill's `references/sources.md`. A checker resolves every DOI and PMID at Crossref and PubMed and compares year, first author and title with the entry. | [`tools/check_citations.py`](tools/check_citations.py), run by a [workflow](.github/workflows/citations.yml) whenever a bibliography changes |
-| Scripts | Standard library only, no network unless declared, `--help` runs, unit tests with expected values derived by hand or from published worked examples. | [`tools/run_tests.py`](tools/run_tests.py), CI on Python 3.9 to 3.13 (Linux, macOS, Windows) |
+| Scripts | Standard library only, no network unless declared, `--help` runs, unit tests with expected values derived by hand or from published worked examples. | [`tools/run_tests.py`](tools/run_tests.py), CI on Python 3.10 to 3.14 (Linux, macOS, Windows) |
 | Structure | Frontmatter, line budget, link targets, orphan files, eval layout, no machine-specific paths. | [`tools/validate_skills.py`](tools/validate_skills.py) |
 | Review | Each skill was drafted by one AI agent and then audited by a second, independent one that re-read the cited sources, recomputed script outputs and repaired what it found. | [`docs/verification.md`](docs/verification.md) |
 | Behaviour | Three eval cases per skill with objective graders, meant to be run with and without the skill. | `skills/<name>/evals/` |
