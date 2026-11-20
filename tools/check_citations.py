@@ -36,10 +36,12 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-USER_AGENT = "tumor-immunology-skills-citation-check/1.0 (+https://github.com/Alex-w0731/tumor-immunology-skills)"
+USER_AGENT = "citation-check/1.0 (python-urllib)"
 
 ENTRY_RE = re.compile(r"^\s*[-*]\s+\*\*\[([A-Z][A-Za-z'’\-]*((?:19|20)\d{2})[a-z]?)\]\*\*\s*(.*)$")
-DOI_RE = re.compile(r"\b(10\.\d{4,9}/[^\s\"<>)\]]+)")
+# A DOI may contain balanced parentheses (Elsevier SICI DOIs such as 10.1016/0895-4356(95)00048-8),
+# so a parenthesised group is accepted while an unbalanced closing parenthesis ends the match.
+DOI_RE = re.compile(r"\b(10\.\d{4,9}/(?:[^\s\"<>()\[\]]|\([^\s\"<>()]*\))+)")
 PMID_RE = re.compile(r"\bPMID:?\s*(\d{6,9})\b")
 STOPWORDS = {"a", "an", "and", "the", "of", "in", "to", "for", "with", "on", "by", "from", "is", "are", "as", "at", "or", "via"}
 

@@ -52,6 +52,10 @@ metadata:
 ---
 ```
 
+Write `description` (and any value containing a colon followed by a space, or ` #`) either as one
+double-quoted line or as a `>-` folded block: full YAML parsers reject an unquoted value that
+contains `: `, and the skill then fails to load.
+
 Body, in this order (rename headings only if the content truly needs it):
 
 1. `# <Title>` and one short paragraph: the situation, and what the agent must deliver.

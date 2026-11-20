@@ -49,7 +49,7 @@ REQUIRED_METADATA = ("author", "version", "domain", "summary", "summary-zh")
 LINK_RE = re.compile(r"(?<!\!)\[[^\]\n]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 IMAGE_RE = re.compile(r"\!\[[^\]\n]*\]\(([^)\s]+)\)")
 SOURCE_KEY_RE = re.compile(r"\[([A-Z][A-Za-z'’\-]*(?:19|20)\d{2}[a-z]?)\]")
-DOI_RE = re.compile(r"\b10\.\d{4,9}/[^\s\"<>)\]]+")
+DOI_RE = re.compile(r"\b10\.\d{4,9}/(?:[^\s\"<>()\[\]]|\([^\s\"<>()]*\))+")
 PMID_RE = re.compile(r"\bPMID:?\s*(\d{6,9})\b")
 URL_RE = re.compile(r"https?://[^\s)>\]]+")
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
@@ -207,6 +207,27 @@ def check_hygiene(path: Path, text: str, rep: Report) -> None:
         rep.warn(where, "does not end with a newline")
 
 
+def check_plain_scalars(front: str, where: str, rep: Report) -> None:
+    """Flag unquoted YAML values that a real YAML parser rejects or silently truncates.
+
+    The light parser above accepts them, but Claude Code and other agents use full YAML, where
+    an unquoted value containing ': ' is an error and ' #' starts a comment.
+    """
+    for n, line in enumerate(front.splitlines(), 1):
+        m = re.match(r"^(\s*)([A-Za-z0-9_-]+):\s+(.*)$", line)
+        if not m:
+            continue
+        value = m.group(3).rstrip()
+        if not value or value[0] in "\"'" or value in ("|", ">", "|-", ">-", "|+", ">+"):
+            continue
+        if value.startswith("[") and value.endswith("]"):
+            continue
+        if value[0] in "&*!%@`{|>":
+            rep.error(where, f"frontmatter line {n}: unquoted value starts with a YAML indicator character; wrap it in double quotes")
+        elif re.search(r":\s|\s#", value) or value.endswith(":"):
+            rep.error(where, f"frontmatter line {n}: unquoted value contains ': ' or ' #', which YAML rejects or truncates; wrap it in double quotes or use a '>-' block")
+
+
 def check_frontmatter(skill: Path, rep: Report) -> tuple[dict, str]:
     md = skill / "SKILL.md"
     where = rel(md)
@@ -215,6 +236,7 @@ def check_frontmatter(skill: Path, rep: Report) -> tuple[dict, str]:
     if front is None:
         rep.error(where, "missing YAML frontmatter delimited by '---' lines")
         return {}, text
+    check_plain_scalars(front, where, rep)
     try:
         meta = parse_simple_yaml(front)
     except ValueError as exc:
