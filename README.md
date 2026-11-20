@@ -49,6 +49,7 @@ Each skill in this repository carries the rule, the reason for it, a tested scri
 |---|---|---|
 | [`tme-bulk-profiling`](skills/tme-bulk-profiling/SKILL.md) | Checks a bulk tumor expression matrix, scores immune signatures and reports immune phenotypes with their limits. | `check_expression_matrix.py` `signature_coverage.py` |
 | [`immune-deconvolution-review`](skills/immune-deconvolution-review/SKILL.md) | Chooses, runs and sanity-checks immune deconvolution of bulk tumor transcriptomes, with an NNLS script and a mixture benchmark. | `mixture_benchmark.py` `nnls_deconvolve.py` |
+| [`immune-signature-curation`](skills/immune-signature-curation/SKILL.md) | Builds, imports and audits immune gene signatures and GMT files for provenance, symbol hygiene, redundancy and confounding. | `gmt_lint.py` `signature_overlap.py` |
 
 **Single-cell, repertoire and spatial statistics**
 
@@ -71,7 +72,7 @@ Each skill in this repository carries the rule, the reason for it, a tested scri
 |---|---|---|
 | [`citation-evidence-check`](skills/citation-evidence-check/SKILL.md) | Checks that references exist, match their metadata, are not retracted, and actually support the claims they are cited for. | `verify_references.py` |
 
-<sub>8 skills, 15 scripts.</sub>
+<sub>9 skills, 17 scripts.</sub>
 
 <!-- catalog:end -->
 

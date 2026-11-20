@@ -49,6 +49,7 @@
 |---|---|---|
 | [`tme-bulk-profiling`](skills/tme-bulk-profiling/SKILL.md) | 检查肿瘤 bulk 表达矩阵，计算免疫特征评分，并在说明局限的前提下给出免疫表型。 | `check_expression_matrix.py` `signature_coverage.py` |
 | [`immune-deconvolution-review`](skills/immune-deconvolution-review/SKILL.md) | 选择、运行并核查肿瘤 bulk 转录组的免疫去卷积，附 NNLS 脚本与混合样本基准评估。 | `mixture_benchmark.py` `nnls_deconvolve.py` |
+| [`immune-signature-curation`](skills/immune-signature-curation/SKILL.md) | 构建、导入并审核免疫基因签名与GMT文件，核查来源、基因符号、冗余与混杂。 | `gmt_lint.py` `signature_overlap.py` |
 
 **单细胞、受体库与空间统计**
 
@@ -71,7 +72,7 @@
 |---|---|---|
 | [`citation-evidence-check`](skills/citation-evidence-check/SKILL.md) | 核对参考文献是否真实、信息无误、未撤稿，并确认原文确实支持所引用的论述。 | `verify_references.py` |
 
-<sub>共 8 个技能、15 个脚本。</sub>
+<sub>共 9 个技能、17 个脚本。</sub>
 
 <!-- catalog:end -->
 
