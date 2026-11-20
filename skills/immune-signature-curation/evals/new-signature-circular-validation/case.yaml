@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: new-signature-circular-validation
+expected_outcome: |
+  The agent declines to present R120 as validated. It explains that the AUC of 0.94 is optimistic
+  because the genes were selected with the response labels of all 38 patients before the
+  cross-validation, so selection must be repeated inside each fold or the frozen signature tested in
+  an independent anti-PD-1 cohort. It states that the TCGA-SKCM survival association is a different
+  endpoint in a cohort not selected for anti-PD-1 treatment and that, as large random gene sets often
+  associate with outcome, R120 must be compared with random sets of 120 genes and adjusted for
+  proliferation and purity. It asks for comparison with established signatures (for example the
+  IFN-gamma or T cell-inflamed gene lists) for incremental value. It records R120 in the library
+  with a derived label naming the cohort and selection method, and drafts methods text that
+  describes it as exploratory.

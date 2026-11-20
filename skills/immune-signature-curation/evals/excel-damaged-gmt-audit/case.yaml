@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: excel-damaged-gmt-audit
+expected_outcome: |
+  The agent lints the file and finds spreadsheet damage in APC_MHCII: 8-Mar is a date and 43891 is
+  a five-digit date serial (1 March 2020), probably MARCH8 and MARCH1, whose current symbols are
+  MARCHF8 and MARCHF1; it restores them only with a clear note that this must be confirmed in the
+  original source, or removes them pending that source. It reports that Checkpoints is defined
+  twice with different genes (a dictionary-based reader keeps only the last one) and resolves this
+  explicitly. It renames CTGF to CCN2 and FAM101B to RFLNB and records the originals, maps PD-L1 to
+  CD274 and TIM-3 to HAVCR2, and warns that the TPM matrix must carry the same symbol version
+  (an older annotation may still list CTGF, FAM101B or MARCH1), so coverage must be rechecked after
+  renaming. It flags Mouse_CTL as mouse nomenclature in a human file (upper-casing would give CD8B1,
+  a previous symbol of human CD8B, the orthologue of Cd8b1), and treats the one-gene Treg set as a
+  FOXP3 readout. It writes a cleaned GMT with provenance in the description field and a change log.
+context:
+  scaffold_script: place-files.sh

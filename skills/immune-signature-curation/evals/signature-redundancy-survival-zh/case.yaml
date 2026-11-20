@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: signature-redundancy-survival-zh
+expected_outcome: |
+  The agent computes pairwise gene overlap (Jaccard index and overlap coefficient): both CYT genes lie
+  inside Danaher_Cytotoxic_cells (J = 0.2, OC = 1); Immune_Checkpoints and T_cell_Exhaustion share
+  five genes (J about 0.42, OC 0.625); TIS_Ayers18 also overlaps Immune_Checkpoints (5 genes) and
+  IFNG_Ayers6 (3 genes). It explains that the high correlations are partly built in by shared genes
+  and common immune infiltration, so the four scores are not four independent findings; it
+  proposes one joint model, reporting them as one immune-infiltration finding, or a sensitivity
+  analysis with shared genes removed, plus multiple-testing control. Before calling the survival
+  association specific it asks for a benchmark against random gene sets of the same size and for
+  checks or adjustment for tumour purity and proliferation (Proliferation_core is in the file).
+  The answer may be written in Chinese.
+context:
+  scaffold_script: place-files.sh
