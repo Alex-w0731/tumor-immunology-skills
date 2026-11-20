@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: zh-review-resistance-claims
+expected_outcome: |
+  The agent answers in Chinese after looking up all four references and reading their abstracts.
+  Statement 1 is not supported: Zaretsky et al. analysed paired biopsies from four patients
+  (JAK1 or JAK2 loss-of-function mutations in two, a B2M truncating mutation in one), so no
+  population percentage can be drawn from it, and the agent does not invent a replacement figure.
+  Statement 2 overstates Gopalakrishnan et al.: the patient data are associations, and causal
+  support comes from germ-free mice given patient faecal transplants, so "决定" is softened.
+  Statement 3 cites PMID 30006565, which belongs to Duhen et al. (Nat Commun 2018); the correct
+  identifier for Simoni et al. is PMID 29769722 (doi:10.1038/s41586-018-0130-2), whose abstract
+  broadly supports the statement for lung and colorectal cancer. Statement 4 cites a review;
+  the agent recommends primary clinical data for the claim.

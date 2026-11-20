@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: single-image-fragment-rare-nk
+expected_outcome: |
+  The agent runs a label-permutation neighbourhood test on this single image and notices that a
+  detached group of six tumour cells about 350 um from the main tissue receives kNN edges
+  hundreds of micrometres long with k = 10 (longest edge about 420 um against a median
+  nearest-neighbour distance of about 16 um); it caps edge length, uses a radius graph, or
+  separates or removes the fragment. It reports Treg-CD8T enrichment as an observed/expected
+  ratio (about two-fold or more, log2 roughly 1 to 1.25) with a permutation p-value that is not
+  zero, stated with the number of permutations (its floor is 1/(m + 1) one-sided, 2/(m + 1)
+  two-sided), words it as co-localization in this one tissue (not interaction or suppression,
+  and not a statement about patients in general), says NK avoidance cannot be assessed with 4
+  NK cells, and handles edge effects with an interior-cell sensitivity analysis or an explicit
+  caveat.
+context:
+  scaffold_script: place-files.sh

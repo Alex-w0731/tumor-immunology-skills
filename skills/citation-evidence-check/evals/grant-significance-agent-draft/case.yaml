@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: grant-significance-agent-draft
+expected_outcome: |
+  The agent looks up all five references at Crossref or PubMed and reads the abstracts before
+  judging. Reference 1 exists, but the trial reported a cumulative objective response rate of 18%
+  (14 of 76 patients) in non-small-cell lung cancer, so the 40% figure is corrected. Reference 2
+  exists and supports its sentence. Reference 3 (Kurtulus et al. 2015) was retracted in 2024 and
+  is removed as support. The DOI of reference 4 belongs to an unrelated Nature Immunology piece and
+  no paper with the cited title can be found, so the reference is reported as probably fabricated
+  and is not silently replaced by a similar-looking paper. Reference 5 is a mouse study, so the
+  sentence about patients is narrowed to mouse models or flagged as needing a human source. The
+  answer contains a corrected paragraph, a table of changes with reasons, and says for each claim
+  whether it was checked against metadata, the abstract or the full text.
+context:
+  scaffold_script: place-files.sh
