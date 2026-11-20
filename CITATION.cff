@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If these skills contribute to your work, please cite this repository together with the primary papers listed in the relevant skill's references/sources.md."
+title: "tumor-immunology-skills: evidence-linked agent skills for tumor immunology research"
+type: software
+authors:
+  - given-names: Alex
+    family-names: Wang
+    alias: Alex-w0731
+    orcid: "https://orcid.org/0009-0005-8480-5387"
+version: 0.1.0
+date-released: 2026-11-20
+license: MIT
+repository-code: "https://github.com/Alex-w0731/tumor-immunology-skills"
+keywords:
+  - tumor immunology
+  - immuno-oncology
+  - tumor microenvironment
+  - agent skills
+  - bioinformatics
+  - reproducible research

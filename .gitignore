@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Skill evaluation workspaces and CLI results (generated)
+*-workspace/
+skills/*/evals/results/

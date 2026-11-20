@@ -1,0 +1,13 @@
+{
+  "name": "tumor-immunology",
+  "version": "0.1.0",
+  "description": "Evidence-linked agent skills for tumor immunology research: decision rules with sources, tested standard-library scripts, and evals for omics analysis, bench work and rigor checks.",
+  "author": {
+    "name": "Alex Wang",
+    "url": "https://github.com/Alex-w0731"
+  },
+  "homepage": "https://github.com/Alex-w0731/tumor-immunology-skills",
+  "repository": "https://github.com/Alex-w0731/tumor-immunology-skills",
+  "license": "MIT",
+  "keywords": ["tumor-immunology", "immuno-oncology", "tumor-microenvironment", "single-cell", "bioinformatics", "research"]
+}
