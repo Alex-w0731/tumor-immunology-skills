@@ -56,6 +56,7 @@ Each skill in this repository carries the rule, the reason for it, a tested scri
 |---|---|---|
 | [`single-cell-patient-level-stats`](skills/single-cell-patient-level-stats/SKILL.md) | Compares groups in single-cell data at the patient level: pseudobulk DE, composition tests, paired designs and few-patient limits. | `composition_test.py` `pseudobulk_aggregate.py` |
 | [`tcr-repertoire-metrics`](skills/tcr-repertoire-metrics/SKILL.md) | Computes TCR repertoire diversity, clonality and overlap from clonotype counts, compared at equal sequencing depth. | `repertoire_metrics.py` `repertoire_overlap.py` |
+| [`spatial-neighborhood-statistics`](skills/spatial-neighborhood-statistics/SKILL.md) | Tests cell-type co-localization and segregation in tissue by label permutation, per slide, with the patient as the replicate. | `neighborhood_enrichment.py` |
 
 **Outcome and response**
 
@@ -64,7 +65,13 @@ Each skill in this repository carries the rule, the reason for it, a tested scri
 | [`immune-survival-analysis`](skills/immune-survival-analysis/SKILL.md) | Tests immune features against survival with continuous Cox models, sound endpoints, FDR and no cut-point fishing. | `cutpoint_inflation.py` `fdr_adjust.py` `km_logrank.py` |
 | [`response-biomarker-evaluation`](skills/response-biomarker-evaluation/SKILL.md) | Tests whether a biomarker separates immunotherapy responders from non-responders, with honest uncertainty and leakage checks. | `roc_auc.py` `threshold_metrics.py` |
 
-<sub>6 skills, 13 scripts.</sub>
+**Evidence**
+
+| Skill | What it makes the agent do | Bundled scripts |
+|---|---|---|
+| [`citation-evidence-check`](skills/citation-evidence-check/SKILL.md) | Checks that references exist, match their metadata, are not retracted, and actually support the claims they are cited for. | `verify_references.py` |
+
+<sub>8 skills, 15 scripts.</sub>
 
 <!-- catalog:end -->
 

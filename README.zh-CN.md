@@ -56,6 +56,7 @@
 |---|---|---|
 | [`single-cell-patient-level-stats`](skills/single-cell-patient-level-stats/SKILL.md) | 单细胞组间比较的患者水平统计：伪bulk差异表达、细胞比例检验、配对设计与小样本边界 | `composition_test.py` `pseudobulk_aggregate.py` |
 | [`tcr-repertoire-metrics`](skills/tcr-repertoire-metrics/SKILL.md) | 基于克隆型计数表计算TCR库多样性、克隆性与样本间重叠，并在相同测序深度下比较。 | `repertoire_metrics.py` `repertoire_overlap.py` |
+| [`spatial-neighborhood-statistics`](skills/spatial-neighborhood-statistics/SKILL.md) | 基于标签置换检验细胞类型的空间共定位与分离：逐切片分析，以患者为重复单位。 | `neighborhood_enrichment.py` |
 
 **生存结局与疗效**
 
@@ -64,7 +65,13 @@
 | [`immune-survival-analysis`](skills/immune-survival-analysis/SKILL.md) | 用连续Cox模型、合理终点与FDR检验免疫特征与生存的关联，不做截断值挖掘。 | `cutpoint_inflation.py` `fdr_adjust.py` `km_logrank.py` |
 | [`response-biomarker-evaluation`](skills/response-biomarker-evaluation/SKILL.md) | 评估生物标志物能否区分免疫治疗应答者与非应答者，含不确定性与信息泄漏检查。 | `roc_auc.py` `threshold_metrics.py` |
 
-<sub>共 6 个技能、13 个脚本。</sub>
+**证据核查**
+
+| 技能 | 它让智能体做对什么 | 附带脚本 |
+|---|---|---|
+| [`citation-evidence-check`](skills/citation-evidence-check/SKILL.md) | 核对参考文献是否真实、信息无误、未撤稿，并确认原文确实支持所引用的论述。 | `verify_references.py` |
+
+<sub>共 8 个技能、15 个脚本。</sub>
 
 <!-- catalog:end -->
 
