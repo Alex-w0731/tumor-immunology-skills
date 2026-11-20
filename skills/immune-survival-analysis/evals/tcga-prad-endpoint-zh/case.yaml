@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: tcga-prad-endpoint-zh
+expected_outcome: |
+  The agent advises against OS as the endpoint for TCGA-PRAD: the TCGA Pan-Cancer Clinical Data
+  Resource (Liu et al. 2018) records only about 10 deaths among about 500 patients and does not
+  recommend OS (its Table 3 marks it with a caution), and it recommends the progression-free
+  interval (about 93 events) instead. It replaces the per-cell-type surv_cutpoint cut-offs with
+  prespecified Cox models that treat each cell fraction as a continuous variable (hazard ratio per
+  1 SD), with any Kaplan-Meier split fixed in advance; it applies Benjamini-Hochberg FDR across all
+  22 cell types and every endpoint tested; it relates the number of PFI events to how many
+  covariates an adjusted model can carry (about 10 events per parameter); and it proposes adjusting
+  for tumour purity and for stage or Gleason grade group, explaining that immune estimates from
+  bulk tissue are entangled with purity. It asks for one primary-tumour sample per patient (TCGA sample
+  type 01, normal samples and duplicate aliquots removed) before the analysis. The answer may be
+  written in Chinese.

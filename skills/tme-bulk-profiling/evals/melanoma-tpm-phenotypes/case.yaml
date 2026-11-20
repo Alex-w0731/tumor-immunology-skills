@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: melanoma-tpm-phenotypes
+expected_outcome: |
+  The agent checks the matrix before scoring and finds that the values are already on a log scale
+  (maximum about 13, nothing above 50, non-integer), so it does not log-transform again. It checks
+  signature coverage and reports that only 7 of the 19 Pan_F_TBRS genes are present, below the 50%
+  tmelens needs, so the stromal axis rests on CAF_core alone; the CD8 signature rests on CD8A only.
+  It scores with z-score or mean rather than ssGSEA, because ranks within a cut-down matrix are
+  not genome-wide ranks. It explains that the tmelens rule labels the top third of the
+  infiltration axis inflamed, so "4 of 12 inflamed" is fixed by design and is not a prevalence,
+  and that an "excluded" call from bulk RNA cannot show where T cells sit in MEL03; it proposes
+  CD8 IHC or multiplex immunofluorescence for that claim and states that all labels are relative
+  to these 12 samples.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: threshold-and-leakage-audit
+expected_outcome: |
+  The agent reproduces the 2x2 table at the 0.31 cut-off (TP 18, FN 2, FP 3, TN 17)
+  and reports sensitivity 18/20, specificity 17/20, PPV 18/21 and NPV 17/19 with exact
+  (Clopper-Pearson) intervals, for example sensitivity 0.90 (0.68 to 0.99). It explains that the
+  genes and the cut-off were both chosen on these 40 patients, so the AUC of 0.93 and the
+  accuracy figures are apparent and optimistic, and asks for an independent cohort or nested
+  cross-validation that repeats gene selection and cut-off choice inside each training fold. It
+  notes that PPV and NPV reflect this cohort's 50% response rate (PPV about 0.60 at a 20%
+  response rate). The drafted paragraph labels the results as discovery-cohort estimates and does
+  not claim accurate prediction of response. The data file is synthetic.
+context:
+  scaffold_script: place-files.sh

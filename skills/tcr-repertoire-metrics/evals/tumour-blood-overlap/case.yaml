@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: tumour-blood-overlap
+expected_outcome: |
+  The agent restricts the comparison to TRB (the file also holds ten TRA rows), defines
+  clonotypes the same way in both samples, and notes the depth difference (blood 500 reads,
+  tumour 200). At full depth the samples share 11 of 257 clonotypes: Jaccard about 0.043 and
+  Morisita-Horn about 0.056. With blood subsampled to 200 reads (repeats, seed) Jaccard is
+  about 0.04 and Morisita-Horn about 0.055. About 62.5% of tumour reads fall in clonotypes
+  also detected in blood (about 50% with blood at 200 reads), whereas only about 4.8% of
+  blood reads fall in clonotypes detected in the tumour. The answer explains that
+  Morisita-Horn weights clonotypes by abundance and is dominated by the largest clones, that
+  Jaccard counts presence and absence, and that tumour clonotypes not seen in blood may be
+  present below the blood sampling depth.
+context:
+  scaffold_script: place-files.sh

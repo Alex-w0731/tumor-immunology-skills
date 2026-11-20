@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: benchmark-pseudobulk-zh
+expected_outcome: |
+  The agent computes error metrics, not only correlations (for example with mixture_benchmark.py), and reports
+  per-cell-type RMSE and bias. It notices that the true fractions are shares of all cells (rows sum to about
+  0.37-0.55, median about 0.47, because tumour cells are included) while the estimates sum to 1 over the five immune
+  types, and compares them on a common denominator. After that correction B cells remain overestimated (bias about
+  +0.10, slope about 1.4) despite r near 1, and Tregs are estimated at about 0.03-0.04 (mean 0.035) in the four
+  mixtures that contain none. It points out that the reference and the mixtures were built from the same cells, which
+  makes the benchmark optimistic, and recommends rebuilding with held-out cells or patients. It does not endorse the
+  sentence about validated accuracy for TCGA, explains that pseudo-bulk results do not transfer automatically to
+  another platform and purity range, and suggests an orthogonal check such as IHC or flow cytometry on a subset. The
+  answer may be written in Chinese. The input files are synthetic.
+context:
+  scaffold_script: place-files.sh

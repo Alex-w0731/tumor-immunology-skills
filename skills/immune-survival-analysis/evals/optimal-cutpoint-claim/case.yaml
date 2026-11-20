@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: optimal-cutpoint-claim
+expected_outcome: |
+  The agent does not endorse the searched cut-off. It explains that taking the cut-off with the
+  smallest p-value inflates the false-positive rate and quantifies this for these data: a
+  permutation p-value adjusted for the search is about 0.13 (it varies slightly with the seed and
+  the number of permutations), or a simulated false-positive rate for a cohort of this size is
+  far above 0.05 (about 0.48 with 120 patients and 39% censoring in the bundled simulation). It reports the prespecified analyses instead: the Cox hazard ratio per 1 SD of
+  cd8_score, about 0.86 (95% CI 0.68 to 1.08, p about 0.18) unadjusted and about 0.85 (0.68 to
+  1.07) adjusted for stage and age, or the continuous score test (p about 0.19) if no Cox
+  software is available; and a Kaplan-Meier comparison at the median (60 versus 60 patients,
+  log-rank p about 0.17). It does not call CD8 an independent prognostic factor, and it suggests
+  testing a prespecified hypothesis in an independent cohort. The data are synthetic and have
+  no true CD8 effect.
+context:
+  scaffold_script: place-files.sh

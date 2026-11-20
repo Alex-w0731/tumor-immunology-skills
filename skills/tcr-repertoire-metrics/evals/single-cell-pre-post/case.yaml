@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: single-cell-pre-post
+expected_outcome: |
+  The agent analyses TRB (or each chain separately, or paired clonotypes) instead of pooling
+  TRA and TRB contigs, keeps productive contigs only, and uses the number of distinct cells
+  (barcodes) per clonotype as clone size, not UMIs or contig rows. Pre has 30 cells in 26 TRB
+  clonotypes; post has 80 cells in 37 TRB clonotypes. Because cell numbers differ, post is
+  subsampled to 30 cells (repeats and a seed) before diversity is compared: post then has
+  about 17 clonotypes versus 26 pre, lower Shannon entropy (about 2.4 versus 3.2) and higher
+  clonality (about 0.14 versus 0.02; 0.20 at full depth). The share of cells in expanded
+  clonotypes (at least 2 cells) rises from 23% (7 of 30) to 62.5% (50 of 80), about 55% at 30
+  cells. The answer is written in Chinese and treats the single-patient change as descriptive.
+context:
+  scaffold_script: place-files.sh

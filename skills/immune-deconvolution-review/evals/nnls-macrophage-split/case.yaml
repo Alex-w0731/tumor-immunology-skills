@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: nnls-macrophage-split
+expected_outcome: |
+  The agent fits on linear-scale values, converting log2(TPM+1) back with 2^x - 1, rather than fitting log values.
+  It finds that the M1 and M2 signatures are strongly correlated (r about 0.90 between row-scaled columns, about 0.98
+  unscaled), that the fit gives all macrophage signal to M1 and a zero M2 coefficient in every tumour, and that IDO1
+  and CXCL9, two M1 markers, have the largest positive residuals, consistent with expression by cells outside the
+  signature such as tumour cells. It therefore declines to report an M1/M2 ratio or an M2 difference and reports total
+  macrophages with caveats. It explains that the fractions are shares of the five signature cell types rather than of
+  all cells, notes that the non-responders carry less immune signal (sum of coefficients about 0.35-0.41 against
+  0.56-0.64 in responders, with worse fits) and the three-versus-three design, and recommends a purity estimate and
+  validation of the split (mixtures of known composition, or IHC) before any figure. The input files are synthetic.
+context:
+  scaffold_script: place-files.sh

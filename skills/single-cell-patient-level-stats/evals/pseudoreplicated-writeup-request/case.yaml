@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: pseudoreplicated-writeup-request
+expected_outcome: |
+  The agent explains that both analyses treat cells as independent replicates (pseudoreplication), so
+  their p-values say nothing reliable about responders versus non-responders with 3 versus 3 patients.
+  It recommends pseudobulk differential expression with the patients as replicates and per-patient
+  CD8 proportions compared with an exact rank test, noting that 3 versus 3 patients cannot give a
+  two-sided exact p below 0.1. Instead of a results paragraph built on the original p-values it offers
+  exploratory wording and names validation in more patients or an orthogonal assay.

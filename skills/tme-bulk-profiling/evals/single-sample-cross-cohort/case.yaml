@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: single-sample-cross-cohort
+expected_outcome: |
+  The agent explains that z-scores are cohort-relative: a lone sample cannot be z-scored (tmelens
+  then returns 0 for every signature). For the new biopsy it offers a description against the
+  40-tumour cohort held fixed (the mean score placed within the cohort's mean scores, or z-scores
+  with the cohort's frozen gene means and SDs), labelled as a research description. It states that
+  a tmelens TIS_Ayers18 score is an unweighted summary of the 18 genes, not the published
+  clinical-grade T cell-inflamed GEP assay, so the paper's cut-off does not apply, and it declines
+  to make a patient-level response call because the analysis is research use only. For the cohort
+  comparison it explains that each cohort's z-scores are centred on zero by construction, and that
+  cohort and platform are completely confounded, so no rescaling, ssGSEA or batch correction can
+  separate a biological difference from a platform effect; it proposes questions the data can
+  answer, such as within-cohort associations or an orthogonal assay applied to both cohorts.

@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: unequal-depth-diversity
+expected_outcome: |
+  The agent keeps productive TRB rows (five non-productive rows are excluded), notices that
+  tumour_A has 600 reads and tumour_B 150, and compares diversity at a common depth of 150
+  reads by repeated subsampling with a stated seed or by exact rarefaction. At that depth
+  tumour_B has more clonotypes (85) than tumour_A (about 54; exact rarefaction 54.4, roughly
+  45 to 64 across repeats), reversing the raw comparison (195 versus 85). Clonality is
+  defined as 1 minus Shannon entropy over the log of the number of clonotypes; tumour_A is
+  clearly more clonal (about 0.28 at 150 reads, 0.36 at full depth) than tumour_B (about
+  0.02). Chao1 is reported as a depth-dependent lower bound, and tumour_A's large Chao1
+  (about 1,660 at full depth; at 150 reads about 930 on average, roughly 340 to 1,700 across
+  repeats) is flagged as unreliable because it is driven by 180 singletons against 10
+  doubletons.
+context:
+  scaffold_script: place-files.sh
