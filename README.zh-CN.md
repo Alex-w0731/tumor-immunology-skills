@@ -42,6 +42,30 @@
 ## 技能目录
 
 <!-- catalog:start -->
+
+**刻画肿瘤免疫微环境**
+
+| 技能 | 它让智能体做对什么 | 附带脚本 |
+|---|---|---|
+| [`tme-bulk-profiling`](skills/tme-bulk-profiling/SKILL.md) | 检查肿瘤 bulk 表达矩阵，计算免疫特征评分，并在说明局限的前提下给出免疫表型。 | `check_expression_matrix.py` `signature_coverage.py` |
+| [`immune-deconvolution-review`](skills/immune-deconvolution-review/SKILL.md) | 选择、运行并核查肿瘤 bulk 转录组的免疫去卷积，附 NNLS 脚本与混合样本基准评估。 | `mixture_benchmark.py` `nnls_deconvolve.py` |
+
+**单细胞、受体库与空间统计**
+
+| 技能 | 它让智能体做对什么 | 附带脚本 |
+|---|---|---|
+| [`single-cell-patient-level-stats`](skills/single-cell-patient-level-stats/SKILL.md) | 单细胞组间比较的患者水平统计：伪bulk差异表达、细胞比例检验、配对设计与小样本边界 | `composition_test.py` `pseudobulk_aggregate.py` |
+| [`tcr-repertoire-metrics`](skills/tcr-repertoire-metrics/SKILL.md) | 基于克隆型计数表计算TCR库多样性、克隆性与样本间重叠，并在相同测序深度下比较。 | `repertoire_metrics.py` `repertoire_overlap.py` |
+
+**生存结局与疗效**
+
+| 技能 | 它让智能体做对什么 | 附带脚本 |
+|---|---|---|
+| [`immune-survival-analysis`](skills/immune-survival-analysis/SKILL.md) | 用连续Cox模型、合理终点与FDR检验免疫特征与生存的关联，不做截断值挖掘。 | `cutpoint_inflation.py` `fdr_adjust.py` `km_logrank.py` |
+| [`response-biomarker-evaluation`](skills/response-biomarker-evaluation/SKILL.md) | 评估生物标志物能否区分免疫治疗应答者与非应答者，含不确定性与信息泄漏检查。 | `roc_auc.py` `threshold_metrics.py` |
+
+<sub>共 6 个技能、13 个脚本。</sub>
+
 <!-- catalog:end -->
 
 每个技能目录结构一致：

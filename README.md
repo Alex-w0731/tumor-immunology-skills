@@ -42,6 +42,30 @@ Each skill in this repository carries the rule, the reason for it, a tested scri
 ## Skills
 
 <!-- catalog:start -->
+
+**Profile the tumor immune microenvironment**
+
+| Skill | What it makes the agent do | Bundled scripts |
+|---|---|---|
+| [`tme-bulk-profiling`](skills/tme-bulk-profiling/SKILL.md) | Checks a bulk tumor expression matrix, scores immune signatures and reports immune phenotypes with their limits. | `check_expression_matrix.py` `signature_coverage.py` |
+| [`immune-deconvolution-review`](skills/immune-deconvolution-review/SKILL.md) | Chooses, runs and sanity-checks immune deconvolution of bulk tumor transcriptomes, with an NNLS script and a mixture benchmark. | `mixture_benchmark.py` `nnls_deconvolve.py` |
+
+**Single-cell, repertoire and spatial statistics**
+
+| Skill | What it makes the agent do | Bundled scripts |
+|---|---|---|
+| [`single-cell-patient-level-stats`](skills/single-cell-patient-level-stats/SKILL.md) | Compares groups in single-cell data at the patient level: pseudobulk DE, composition tests, paired designs and few-patient limits. | `composition_test.py` `pseudobulk_aggregate.py` |
+| [`tcr-repertoire-metrics`](skills/tcr-repertoire-metrics/SKILL.md) | Computes TCR repertoire diversity, clonality and overlap from clonotype counts, compared at equal sequencing depth. | `repertoire_metrics.py` `repertoire_overlap.py` |
+
+**Outcome and response**
+
+| Skill | What it makes the agent do | Bundled scripts |
+|---|---|---|
+| [`immune-survival-analysis`](skills/immune-survival-analysis/SKILL.md) | Tests immune features against survival with continuous Cox models, sound endpoints, FDR and no cut-point fishing. | `cutpoint_inflation.py` `fdr_adjust.py` `km_logrank.py` |
+| [`response-biomarker-evaluation`](skills/response-biomarker-evaluation/SKILL.md) | Tests whether a biomarker separates immunotherapy responders from non-responders, with honest uncertainty and leakage checks. | `roc_auc.py` `threshold_metrics.py` |
+
+<sub>6 skills, 13 scripts.</sub>
+
 <!-- catalog:end -->
 
 Every skill folder has the same shape:
