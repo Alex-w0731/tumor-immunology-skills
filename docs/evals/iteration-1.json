@@ -1,0 +1,540 @@
+{
+ "date": "2026-11-20",
+ "model": "Claude Opus 5.5",
+ "iteration": 1,
+ "cases": [
+  {
+   "skill": "citation-evidence-check",
+   "case": "grant-significance-agent-draft",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "The result identifies reference 3 (Kurtulus et al., J Clin Invest 2015, TIGIT acting through regulatory T cells) as retracted and the corrected paragraph no longer uses it as support for the TIGIT sentence.",
+     "with_skill": true,
+     "with_evidence": "File: <local path> (L10, L51, L70). The reply says: '[3] Kurtulus 2015 (J Clin Invest) has been retracted. The journal retracted it on 1 July 2024 (notice doi:10.1172/JCI183278, PMID 38949028)'. The corrected paragraph (L18-23) drops the TIGIT sentence, and the new reference list is Topalian, Ayers and Sivan only. The saved Crossref record (updated-by: retraction, source retraction-watch, 2024-07-01) and the PubMed pubtype 'Retracted Publication' confirm the retraction.",
+     "without_skill": true,
+     "without_evidence": "File: <local path> (L33). It says 'Retracted on 1 July 2024 (J Clin Invest 2024;134(13):e183278)' and 'Removed the citation and the claim that TIGIT works mainly through Tregs rather than CD8+ T cells'. In the corrected paragraph (L7) the TIGIT sentence now cites [3] Johnston 2014 and [4] Fourcade 2018, and Kurtulus is gone from the reference list. The notice details it gives (Figures 4B and 7B likely fabricated or falsified, 7A unreliable, all supplied by Smyth) match the PMC retraction notice."
+    },
+    {
+     "text": "The result states that reference 1 reports a cumulative objective response rate of 18% (14 of 76 patients) in non-small-cell lung cancer, not 40%, and the corrected paragraph fixes or removes the 40% figure.",
+     "with_skill": true,
+     "with_evidence": "The reply says: 'Objective responses in non-small-cell lung cancer (NSCLC) were 18% (14 of 76 evaluable patients), not 40%'. The change table (L49) says: 'Topalian 2012 reports a cumulative NSCLC response rate (all doses) of 18%, 14 of 76 evaluable patients... 40% is not reported for NSCLC anywhere.' The corrected paragraph reads: 'objective responses occurred in 18% (14 of 76) of evaluable patients with non-small-cell lung cancer [1]'. This matches the saved abstract, and I confirmed that 40% does not appear in the saved PMC full text (PMC3544539).",
+     "without_skill": true,
+     "without_evidence": "The reply table says: 'the response rate in lung cancer was 18% (14 of 76), not 40%. The figure 40% does not appear anywhere in the paper.' The corrected paragraph reads: 'objective responses occurred in 18% of patients with non-small-cell lung cancer (14 of 76), 28% of patients with melanoma and 27% of patients with renal-cell cancer', and all three rates match the abstract. It never uses the words 'cumulative' or 'all doses', but the figure it gives is the paper's pooled all-dose rate."
+    },
+    {
+     "text": "The result reports that the DOI given for reference 4 resolves to an unrelated Nature Immunology article (about mentoring and diversity in science) and that no paper with the cited title was found, and it does not replace reference 4 with a different paper unless it states that it looked that paper up and checked it against the sentence.",
+     "with_skill": true,
+     "with_evidence": "The reply says: 'Its DOI points to an unrelated one-page article on mentoring (Groom JR, Nat Immunol 2021;22(9):1065). I ran 12 searches of PubMed and Europe PMC and found no paper with that title, author and year.' L11 and L52 give the title 'Diversity in science requires mentoring for all, by all' and call the reference 'probably made up/fabricated'. The sentence is deleted from the corrected paragraph, not replaced. Magen 2023 is offered only outside the paragraph, as an optional sentence, with: 'I confirmed the reference, found no retraction or correction, and read the abstract and full text.' The saved Crossref and PubMed records confirm the DOI belongs to Groom, and the saved title/author/year queries return 0 hits.",
+     "without_skill": true,
+     "without_evidence": "The reply says: 'Its DOI belongs to an unrelated one-page commentary on mentoring (Groom JR, Nat Immunol 2021;22(9):1065)'. L34 gives the title 'Diversity in science requires mentoring for all, by all' and says 'No PubMed or Crossref record matches the title'. B does replace ref 4 with Magen 2023, but it marks it '(new)' and says it 'rewrote the sentence to say what that paper found'. It also lists 'Magen 2023: PMID 37322116' in the 'Checked against' column and includes it in its retraction check of refs 1-6 (L37). The new sentence matches the Magen abstract, which I checked against A's saved Europe PMC record. So this is a disclosed, checked replacement, not a silent swap. B states the check less explicitly than A: it never says per paper whether it read the abstract or the full text."
+    },
+    {
+     "text": "The result points out that reference 5 (Sivan et al., Science 2015) reports experiments in mice, so the sentence about patients with melanoma overstates it, and the corrected text either restricts the statement to mouse models or marks it as needing a human source.",
+     "with_skill": true,
+     "with_evidence": "The reply says: '[5] Sivan 2015 is real, but it is a mouse study. It used B16.SIY melanoma in C57BL/6 mice and has no patient data.' The corrected paragraph reads: 'oral Bifidobacterium improved the efficacy of PD-L1 blockade in mice bearing B16.SIY melanoma [3]'. It also notes: 'Aim 3 now rests on one mouse study. If Aim 3 involves patients, reviewers will look for human evidence.' The saved abstract and full text confirm mouse-only data; humans appear only as a suggestion for future work.",
+     "without_skill": true,
+     "without_evidence": "The reply says: 'every experiment was in mice; the paper has no patient data.' L35 says: 'Changed \"in patients with melanoma\" to \"in a mouse melanoma model\"'. The corrected paragraph reads: 'in a mouse melanoma model, oral Bifidobacterium improved tumour control as much as anti-PD-L1 therapy did, and the combination nearly abolished tumour outgrowth [6]', which matches the abstract. It also offers an optional human-data sentence (Matson 2018, Spencer 2021); both papers exist with correct details."
+    },
+    {
+     "text": "For each of the five statements the result says what the check rested on (reference metadata only, the abstract, or the full text), and it does not describe a statement as verified or supported when only the reference metadata was checked.",
+     "with_skill": true,
+     "with_evidence": "The check table (L64-72) has a 'Checked against' column for every claim, with statements 1 and 2 split into 1a/1b and 2a/2b: 1a 'abstract + PMC full text'; 1b 'abstract + full text (results, Table 2)'; 2a and 2b 'abstract only'; 3 'retraction notice + abstract'; 4 'Crossref DOI and title search; PubMed and Europe PMC searches' with Support 'not assessable'; 5 'abstract + PMC full text'. 'Identity: verified' sits in a separate column from Support, and the reply says 'I checked the Ayers sentence against its abstract only'. No statement is called supported on metadata alone. The full-text claims are backed by saved PMC XML files in responses/manual/.",
+     "without_skill": true,
+     "without_evidence": "The change table (L29-35) has a 'Checked against' column for each of the five draft statements: [1] 'PubMed abstract'; [2] 'PubMed abstract'; [3] the PubMed 'Retracted Publication' listing, 'I read the full retraction notice', and Crossref; [4] DOI resolution plus title and author searches, not described as supported; [5] 'PubMed abstract, PMID 26541606, and full text, PMC4873287'. Nothing is called supported on metadata alone, so it passes. Caveats: for [1] it says '40% does not appear anywhere in the paper' while listing only the abstract as the basis; the claim is true according to the full text, but it goes beyond the stated basis. The only basis for the new Johnston and Fourcade claims is the general header ('checked... against... the papers' abstracts'). B saved no raw evidence, though its new references check out in PubMed."
+    }
+   ],
+   "grader_comparison": "Both attempts pass all five statements, and their core findings match the saved Crossref, PubMed and full-text records. A serves the researcher a little better for a document going to co-investigators tomorrow: its corrected paragraph holds only the original claims, fixed or narrowed, and new citations are offered as marked options. It also has a consistent evidence-basis table for each claim and saves the raw database responses for re-checking. B gives a fuller paragraph and useful extras (Smyth's other retractions, the probiotic caveat), and its new citations are real and match their abstracts, but it rewrites the TIGIT and HCC arguments inside the paragraph itself, saves no evidence, and in one place claims more than its stated basis ('40% does not appear anywhere in the paper' with only the abstract listed).",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statements 1, 2 and 4 would pass for any answer that actually looked up the references: Crossref and PubMed both flag the retraction, and the abstracts state the 18% (14 of 76) figure and the mouse-only design.",
+    "Statement 2 names a 'cumulative' rate. B gives the same 18% (14 of 76) all-dose figure without that word, so a strict grader and a lenient one could disagree.",
+    "Statement 3's clause 'unless it states that it looked that paper up and checked it against the sentence' does not say how explicit that statement must be. B shows it only through a PMID in a 'Checked against' column and the phrase 'rewrote the sentence to say what that paper found'.",
+    "Statement 5 penalizes only calling something supported on metadata alone. It does not catch claims that go beyond a stated abstract-only basis (B's '40% does not appear anywhere in the paper'), and it does not cover how replacement statements were checked, so it barely separates the two attempts."
+   ]
+  },
+  {
+   "skill": "immune-deconvolution-review",
+   "case": "benchmark-pseudobulk-zh",
+   "with_skill": {
+    "passed": 6,
+    "total": 6
+   },
+   "without_skill": {
+    "passed": 6,
+    "total": 6
+   },
+   "statements": [
+    {
+     "text": "For each of the five cell types the answer reports at least one error metric computed from the two files other than correlation (RMSE, bias or slope), and it states that correlations above 0.9 do not by themselves show that the estimates are accurate.",
+     "with_skill": true,
+     "with_evidence": "The reply table gives same-denominator RMSE/bias/slope for all five types: CD8 2.6/-2.3/0.93, CD4 5.9/-5.3/0.78, Treg 2.3/+0.4/0.82, B 10.6/+10.3/1.38, Macrophage 3.4/-3.1/0.94 pp. It also gives raw ranges (bias +6.8 to +20.8 pp, RMSE 8.0-21.8, slope 1.34-2.50). The same values are in per_cell_type_summary.tsv and benchmark_*.json, and I reproduced all of them. On correlation it says \"r只能说明每种细胞在12个样本间的高低顺序基本对，不能说明数值准\", and the figure title reads \"相关系数高 ≠ 估计准确\".",
+     "without_skill": true,
+     "without_evidence": "The reply gives raw slope 1.34-2.50 and bias +6.8 to +20.8 pp across the five types, plus same-denominator B cell +10.3 pp (slope 1.38) and CD4 -5.3 pp. metrics_by_celltype.tsv, which the reply cites, lists ols_slope, mean_bias_pp and rmse_pp for every type under both denominators, and fig1 annotates slope and bias in each panel. I verified the values. On correlation it says \"只是 Pearson 看不出来\" and \"对某一类细胞的估计整体乘一个系数或加一个常数，Pearson 完全不变，所以 r 看不出这些问题\". Caveat: the per-type values for CD8, Treg and Macrophage appear only in the TSV and figure, not in the reply text."
+    },
+    {
+     "text": "The answer identifies that the true fractions are relative to all cells (rows sum to roughly 0.37-0.55, median about 0.47, because tumour cells are included) whereas the estimates sum to 1 over the five immune cell types, and it compares them on a common denominator (for example by rescaling the truth to sum to 1 over the five types) instead of reading bias or RMSE from the raw comparison.",
+     "with_skill": true,
+     "with_evidence": "It says \"估计值在每个样本里5类加起来都是1.000。真实值5类加起来只有0.37–0.55，其余45–63%是肿瘤及其他细胞\" and \"下表把真实值除以该样本5类之和后再比较\". It also ran mixture_benchmark.py --renormalize truth (benchmark_truth_renormalized.json). The raw numbers are presented as a denominator artefact (\"两个表的分母不同，数值差约2–3倍\"), and all accuracy conclusions come from the rescaled table. The reply does not state the median, but the benchmark_as_given.json warning gives \"truth 0.469, estimate 1.000\".",
+     "without_skill": true,
+     "without_evidence": "It says \"每个样本 5 类估计值加起来都是 1.000。真实情况下这 5 类免疫细胞只占 37–55%，其余 45–63% 是肿瘤细胞\" and \"方法实际给出的是'免疫细胞内部的构成'\". It compares after rescaling (\"换算成免疫细胞内部比例后\"), recommends \"用换算后的真值来评估\", and validation_analysis.R computes truth_rel = truth / immune_total. It also reports raw bias and CCC as \"绝对值被系统性高估\", but attributes this to the denominator (\"因此\") and draws the B-cell conclusion from the rescaled comparison. The median 0.47 is not stated anywhere in the reply or files."
+    },
+    {
+     "text": "After putting truth and estimates on the same denominator, the answer identifies B cells as systematically overestimated (bias of about +0.1, or roughly 1.4 to 1.5 times the true share) despite a near-perfect correlation.",
+     "with_skill": true,
+     "with_evidence": "The B细胞 table row shows same-denominator r 0.997, bias +10.3 pp and slope 1.38. The reply adds \"平均真实份额20.1%，估计值30.4%\" (about 1.5x) and \"换到同一分母后，B细胞仍被系统性高估\". This matches my recomputation: bias +0.103, slope 1.384, r 0.997.",
+     "without_skill": true,
+     "without_evidence": "It says \"这样比较时 r 升到 0.98–1.00，但 B 细胞平均高估 10.3 个百分点（斜率 1.38）\". metrics_by_celltype.tsv shows the B-cell row (within 5 immune types) at r 0.9974, bias 10.3 pp and ratio_of_means 1.513, all of which I verified."
+    },
+    {
+     "text": "The answer notes that Tregs receive non-zero estimates (about 0.03-0.04 on average) in the four mixtures that contain no Tregs (PB03, PB06, PB09, PB11) and treats this as a background or false-positive level.",
+     "with_skill": true,
+     "with_evidence": "Under the heading \"背景水平\" it says \"Treg在PB03、PB06、PB09、PB11中真实为0，估计值却有3.0–3.9%。也就是说...Treg低于约4%也无法和'没有'区分开\". It later recommends \"Treg低于约4%按未检出处理\". I verified the values (0.0323, 0.0393, 0.0366, 0.0304; mean 0.0347).",
+     "without_skill": true,
+     "without_evidence": "It says \"Treg 有约 3% 的底噪。4 个真实不含 Treg 的样本（PB03/06/09/11）估计值为 3.0–3.9%\". The error model includes a Treg floor term (bias_model_fit.tsv, floor 0.0153), and the fig2 subtitle notes Treg appearing in the 4 samples that contain none."
+    },
+    {
+     "text": "The answer points out that the reference matrix and the pseudo-bulk mixtures were built from the same cells, so the benchmark overstates accuracy, and recommends rebuilding the reference from held-out cells or patients.",
+     "with_skill": true,
+     "with_evidence": "It says \"验证设计是循环的：参考矩阵和混合样本来自同一批细胞...这种设计会高估准确度\". Section B.1 recommends \"按患者拆分：用一部分患者的细胞建参考矩阵，用另一部分患者的细胞（包括这些患者的肿瘤细胞）做混合样本...做留一患者交叉验证\".",
+     "without_skill": true,
+     "without_evidence": "It says \"参考矩阵和伪bulk用的是同一批细胞，相当于自己验证自己，只代表最理想的情况\" and \"这个结果只能看作上限\". It recommends \"按患者拆分（留一患者或 k 折）：参考矩阵和标记基因只用训练患者，伪bulk只用留出患者的细胞\", and pseudobulk_benchmark_template.R implements that patient-level split."
+    },
+    {
+     "text": "The answer advises against writing that the method is validated as accurate for TCGA-LUAD on the basis of this benchmark, and it gives a reason specific to transfer (single-cell pseudo-bulk versus bulk RNA-seq protocol or platform, or a different purity range in TCGA) together with a concrete orthogonal check such as IHC or flow cytometry on a subset of samples.",
+     "with_skill": true,
+     "with_evidence": "It opens with \"文章里不能写'该方法经伪bulk验证，估计准确'\". Transfer reasons: \"单细胞数据（常见为3'端测序，有dropout）和bulk全长RNA-seq之间存在基因层面的系统差异\" and \"TCGA-LUAD样本之间纯度差异很大\". Orthogonal check: \"在有bulk RNA-seq的肺腺癌样本上做正交测量...流式，或IHC/多重免疫荧光（如CD8、CD4、FOXP3、CD20、CD68）\", with \"只有这一步才能支持'在TCGA中估计准确'\".",
+     "without_skill": true,
+     "without_evidence": "It says \"文章里还不能写'估计准确'\". Transfer reasons: \"单细胞（如 10x 3'端）表达加和不等于 TCGA 的全长 polyA bulk（RSEM/TPM）\" and \"TCGA-LUAD 的纯度跨度远大于 45–63%\", backed by a simulation in which median r falls to 0.52-0.86 (verified in purity_range_sensitivity.tsv). Orthogonal check: \"最好有一组 LUAD 样本同时有 bulk RNA-seq 和流式、多重免疫荧光或 IHC 定量，10–20 例也有价值\"."
+    }
+   ],
+   "grader_comparison": "Both attempts pass all six statements, and every figure I checked in both is correct. A is a little easier to act on, because its reply holds the full common-denominator table (RMSE, bias and slope for all five types) and a draft paper sentence built on those metrics. B adds stronger TCGA-specific evidence (a purity-range simulation, an error model and a runnable patient-split benchmark template), but leaves three cell types' error metrics to its TSV and opens its draft sentence with the raw r values, so overall the two are close.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statement 2: it is unclear whether the parenthetical 'median about 0.47' is required. Neither reply states the median: A's benchmark_as_given.json warning gives 0.469, and B's files do not give it. The clause 'instead of reading bias or RMSE from the raw comparison' is also hard to grade, because both answers report raw bias and RMSE to show the denominator mismatch before switching to the rescaled comparison.",
+    "Statement 1: it is unclear whether per-type metrics that appear only in output files or figures count as 'the answer reports'. B's reply text names per-type error values only for B cells and CD4; the other three types are in metrics_by_celltype.tsv and fig1.",
+    "Statements 5 and 6 cover standard caveats (circular reference, transfer to TCGA, an orthogonal IHC or flow check) that any competent answer would raise, so they did not separate the attempts here.",
+    "No statement separated these two attempts: all six pass for both."
+   ]
+  },
+  {
+   "skill": "immune-signature-curation",
+   "case": "excel-damaged-gmt-audit",
+   "with_skill": {
+    "passed": 6,
+    "total": 6
+   },
+   "without_skill": {
+    "passed": 5,
+    "total": 6
+   },
+   "statements": [
+    {
+     "text": "The result identifies 8-Mar and 43891 in APC_MHCII as spreadsheet-converted gene symbols (a date and a date serial) and either restores them as MARCHF8 and MARCHF1 while saying this must be confirmed against the original source, or removes them pending that source; it neither keeps them as genes nor replaces them without comment.",
+     "with_skill": true,
+     "with_evidence": "Removed pending the source. The cleaned GMT's APC_MHCII has 6 genes (CIITA CD74 HLA-DRA HLA-DRB1 HLA-DPA1 CD86). changes.tsv rows 5-6 read 'SPREADSHEET_DATE: the gene symbol was converted to a date ... Candidates: MARCH8 (current symbol MARCHF8)' and 'SPREADSHEET_SERIAL ... 2020-03-01 in the 1900 date system = 1-Mar = MARCH1 (current symbol MARCHF1)', with status 'Look up in the source; if the source shows MARCH8, add MARCHF8'. The reply says: 'If it says MARCH8 and MARCH1, add MARCHF8 and MARCHF1 ... If you can't confirm them, leave them out'. Both fields are kept in the provenance JSON dropped_fields. Serial checked: 43891 = 2020-03-01 (1900 system), 2024-03-02 (1904 system, which A also mentions).",
+     "without_skill": true,
+     "without_evidence": "Restored, with an explicit note to confirm. The cleaned GMT's APC_MHCII ends '... CD86 MARCHF8 MARCHF1'. Log rows: 'Excel date | 8-Mar | MARCHF8 | changed - verify | ... Confirm against the source table' and 'Excel date serial (inferred) | 43891 | MARCHF1 | changed - verify | 43891 is Excel's serial number for 2020-03-01 ... MARCH1 (now MARCHF1) or MARC1 (now MTARC1) ... Confirm against the source table'. Reply item 1: 'Confirm the two MARCH genes in APC_MHCII ... Check both genes against the original table, opened as plain text'. The confirm warning is in the reply and log only; the GMT itself carries no marker."
+    },
+    {
+     "text": "The result reports that the set name Checkpoints is defined twice with different genes (8 genes and 3 genes), explains that a reader would silently keep only one definition (dictionary-based readers keep the last, 3-gene one), and resolves it explicitly by renaming, merging or dropping one with a stated reason.",
+     "with_skill": true,
+     "with_evidence": "Reply change #8: 'Checkpoints (7) | Second definition removed | Same name as line 3. Readers that store sets by name keep only the last definition (this 3-gene one) without saying so; other readers may merge or reject it. Its genes (PDCD1, CD274, CTLA4) are all inside the line-3 set (J = 0.375, OC = 1), so I kept the 8-gene version'. lint_input.json reports DUPLICATE_SET_NAME as an error on lines 3 and 7. The cleaned GMT has one Checkpoints set (8 genes). The dropped set is kept in provenance excluded_sets with 'to keep both, give this one its own name'.",
+     "without_skill": false,
+     "without_evidence": "Reported and resolved explicitly: both sets renamed to Checkpoints_8gene and Checkpoints_3gene ('Two different sets had the same name'; log: 'renamed by size so none is overwritten. Decide which one you mean'). The explanation is only partial: 'Depending on the reader, the repeated \"Checkpoints\" name would have caused an error, kept only one of the two sets, or merged them.' It never says that a dictionary-based reader keeps the last (3-gene) definition, so the user isn't told that the 8-gene panel would be the one lost. It also doesn't say the loss is silent: the reply counts the duplicate among problems that would not have 'stopped ssGSEA from running', yet also says it might cause an error. Missing: which definition survives, and that the loss happens without warning."
+    },
+    {
+     "text": "The cleaned file replaces CTGF with CCN2 and FAM101B with RFLNB in Pan_F_TBRS, and the result records the original symbols.",
+     "with_skill": true,
+     "with_evidence": "In immune_signatures_cleaned.gmt, Pan_F_TBRS has CCN2 and RFLNB in the positions CTGF and FAM101B held. The provenance JSON has \"original_symbols\": {\"CCN2\": \"CTGF\", \"RFLNB\": \"FAM101B\"}. changes.tsv rows 1-2 log CTGF -> CCN2 and FAM101B -> RFLNB, and the reply table lists both.",
+     "without_skill": true,
+     "without_evidence": "In immune_signatures_synthetic_cleaned.gmt, Pan_F_TBRS has CCN2 and RFLNB in the positions CTGF and FAM101B held. Log rows: 'outdated symbol | CTGF | CCN2 | changed | HGNC renamed CTGF to CCN2' and the same for FAM101B -> RFLNB. The reply table shows Was/Now for both. Originals are recorded in the log, not in the GMT description field."
+    },
+    {
+     "text": "The result warns that the TPM matrix must use the same symbol version as the cleaned GMT, because an older annotation may still carry the retired symbols (for example CTGF, FAM101B or MARCH1) so the renamed genes would silently fail to match, and it asks for per-set gene coverage to be checked in the matrix after renaming.",
+     "with_skill": true,
+     "with_evidence": "Reply item 6: 'Rerun the lint with the complete HGNC table, ideally the version used to annotate your matrix. Check whether your TPM matrix uses CCN2/RFLNB or the old CTGF/FAM101B (and MARCHF1/MARCHF8 if you restore them). If it uses the old names, map the matrix and the GMT with the same table. Otherwise those genes drop out with no error. Send me hgnc_complete_set.txt and the matrix's gene list, and I'll run the full check and count how many genes of each set are measured.' It also says: 'Not done yet, because they need your matrix: gene coverage per set'. The provenance JSON has n_genes_measured: null for every set, and Pan_F_TBRS has the open item 'Check which symbols the TPM matrix uses: CCN2 or CTGF, RFLNB or FAM101B'. A ships no coverage tool; it asks for the matrix instead.",
+     "without_skill": true,
+     "without_evidence": "Reply item 3: 'Older TCGA annotations use CTGF, FAM101B, MARCH1 and MARCH8. If yours does, those genes are now the ones that would be silently missed. The script reports coverage for each set and tells you which symbol to swap back: python3 clean_gmt.py ... --matrix your_SKCM_tpm.tsv'. Log notes say 'older matrices may still use CTGF/FAM101B'. I ran this check on a fake matrix that uses the old symbols. It printed per-set coverage (Pan_F_TBRS 17/19, APC_MHCII 6/8) and lines such as 'CCN2 is absent but the matrix has CTGF: use that symbol in the GMT for this matrix'."
+    },
+    {
+     "text": "The result flags Mouse_CTL as mouse nomenclature in a file meant for human data and handles it explicitly (orthologue mapping stated, for example Cd8b1 to CD8B, or the set put aside) rather than leaving it to match nothing or upper-casing it silently.",
+     "with_skill": true,
+     "with_evidence": "Set aside. Reply change #9: 'Mouse_CTL (8) | Set removed | Mouse symbols, but your data are human. Upper-casing is not orthologue mapping: Cd8b1 would become \"CD8B1\", a retired symbol of human CD8B, and would drop out without warning'. Item 4 offers mapping through HGNC HCOP or MGI with the version recorded, and lists the expected orthologues (CD8A, CD8B, GZMB, PRF1, NKG7) as unverified. The set's genes and the reason are kept in provenance excluded_sets.",
+     "without_skill": true,
+     "without_evidence": "Mapped. The cleaned GMT has 'Mouse_CTL_human_orthologs curated CD8A CD8B GZMB PRF1 NKG7'. The reply table maps 'Cd8a, Cd8b1, Gzmb, Prf1, Nkg7 | CD8A, CD8B, GZMB, PRF1, NKG7 | Mapped to human 1:1 orthologs. Uppercasing would not work, because CD8B1 isn't a human gene', and the log has one row per gene. Item 4 asks whether a mouse-derived signature is acceptable for human tumours. Minor issues: no orthology resource or version is named, and 'CD8B1 isn't a human gene' is loose (CD8B1 is a previous HGNC symbol of human CD8B)."
+    },
+    {
+     "text": "The result states that the one-gene Treg set is a single-gene readout of FOXP3 rather than a signature, so it should be reported as FOXP3 expression or dropped, not presented as a signature score.",
+     "with_skill": true,
+     "with_evidence": "Reply change #7: 'Treg (6) | Set removed | Only one gene (FOXP3). An ssGSEA score of one gene is just that gene's rank, not a Treg signature'. Item 5: 'Either plot FOXP3 expression labelled \"FOXP3\", or add a multi-gene Treg list from a named source.' Treg is not in the cleaned GMT, and changes.tsv row 7 gives the SINGLE_GENE_SET reason.",
+     "without_skill": true,
+     "without_evidence": "Reply item 5: 'Treg is FOXP3 alone, so its ssGSEA \"score\" only reflects FOXP3's rank in each sample. Show FOXP3 expression directly, or use a multi-gene Treg signature.' Log flag: 'One gene: its ssGSEA score only reflects FOXP3's rank within each sample'. The Treg set is still in the cleaned GMT, but B lists it among the items to settle before it writes the scoring script ('Once items 1, 2 and 5 are settled'). It passes on what is stated, but is weaker than A, which removed the set."
+    }
+   ],
+   "grader_comparison": "Attempt A serves the researcher better. It never guesses an identity into the scoring file: the two Excel-damaged fields are removed pending the source, and Treg and Mouse_CTL are set aside with clear routes back. It also says exactly which Checkpoints definition a dictionary reader would silently keep, writes a per-set provenance record with original symbols and TO FILL fields, and gets the CD8B1 point right. Attempt B is more convenient (all 8 sets kept, mouse orthologues mapped, and a working --matrix coverage check that suggests swapping back to old symbols), but it writes an inferred MARCHF1 and an unsourced orthologue mapping straight into the scoring GMT, keeps the one-gene Treg set, and explains the duplicate-name risk only in general terms.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statement 2 depends on whether its parenthetical ('dictionary-based readers keep the last, 3-gene one') is required. Under a lenient reading, B's 'kept only one of the two sets' would pass. It is the only statement that separates the two attempts.",
+    "Statement 3 would pass for almost any answer that ran a symbol check. Both attempts made the same two renames and logged the originals, so it does not discriminate.",
+    "Statement 6 is unclear about whether keeping the one-gene set in the cleaned GMT counts as 'presenting it as a signature score' when the text says to show FOXP3 expression instead (B's case).",
+    "Statement 5 accepts either orthologue mapping or setting the set aside, and does not require a named orthology resource or version. So an unsourced mapping (B) passes as easily as a documented set-aside (A).",
+    "Statement 1 accepts both restoring with a note and removing, by design. So it does not separate the more cautious choice (A removes the fields pending the source) from writing an inferred symbol into the scoring file with a warning only in the log and reply (B)."
+   ]
+  },
+  {
+   "skill": "immune-survival-analysis",
+   "case": "optimal-cutpoint-claim",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 4,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "The answer declines to present the log-rank p-value of the searched cut-off (0.607, p = 0.008) as valid evidence and explains that choosing the cut-off with the smallest p-value inflates the false-positive rate.",
+     "with_skill": true,
+     "with_evidence": "Reply: \"0.607 was the best of 96 cut-offs tried, and an ordinary log-rank test assumes no search took place\" and \"The search makes the p-value look smaller than it is\". It adds that under no effect \"the best cut reached p < 0.05 in 48% of them; a median split did so in 6%\". The exploratory figure is titled \"not for inference\" and its subtitle says \"Naive log-rank p = 0.008 is not valid.\" cox_results.tsv labels the 0.607 rows \"NOT VALID FOR INFERENCE\".",
+     "without_skill": true,
+     "without_evidence": "Reply: \"p = 0.008 is the smallest of 96 p-values, so it can't be read as an ordinary p-value... Even with no real effect, this search finds at least one cut-off with p < 0.05 in 44% of datasets.\" results_paragraph.md calls it the \"uncorrected log-rank p = 0.008\" and says that after correction for the data-driven cut-off the difference is not significant. The KM figure (km_cd8_cutoff_0.607.png) is labelled \"not adjusted for cut-off selection\" and also shows the adjusted p = 0.13."
+    },
+    {
+     "text": "The answer gives a number, computed for this dataset, that accounts for the cut-off search: a permutation p-value adjusted for the search (about 0.13; values from 0.1 to 0.2 are acceptable) or a simulated false-positive rate of the search for a cohort of about 120 patients (about 0.4 to 0.5 at alpha 0.05).",
+     "with_skill": true,
+     "with_evidence": "Reply: \"search-adjusted p = 0.13\". cutpoint_permutation.json gives search_adjusted_p 0.1306 (10,000 permutations) and r_analysis_log.txt gives 0.1277. B also gives a simulated false-positive rate: 0.477 in cutpoint_null_simulation.json (n = 120, 39.2% censoring, alpha 0.05), stated as 48% in the reply.",
+     "without_skill": true,
+     "without_evidence": "analysis_log.txt section 3: \"Permutation test repeating the full search (20,000 permutations): p = 0.133\". cutoff_pvalue_corrections.csv gives 0.1328, and the reply says \"the corrected p is 0.13\". It also gives the share of permuted null datasets with any cut-off at p < 0.05: 44%. My own recomputation with 1,000 permutations gave p = 0.129 and a null share of 0.447."
+    },
+    {
+     "text": "The answer analyses cd8_score as a continuous variable and reports that the association is not statistically significant: a Cox hazard ratio per 1 SD of about 0.86 (95% CI about 0.68 to 1.08, p about 0.18) or, when no Cox software is available, the continuous score test with p about 0.19.",
+     "with_skill": true,
+     "with_evidence": "Reply: \"Unadjusted: HR 0.86 per SD (95% CI 0.68–1.08), p = 0.18.\" Results paragraph: \"associated with a lower hazard of death, but not significantly (HR 0.86 per 1 SD, 95% CI 0.68-1.08, p = 0.18)\". cox_results.tsv gives 0.857 (0.682–1.076), p = 0.183, which matches my own fit.",
+     "without_skill": true,
+     "without_evidence": "results_paragraph.md (also quoted in the reply): \"a higher CD8 score showed a non-significant trend towards longer OS (hazard ratio [HR] per 1-SD increase 0.86, 95% CI 0.68–1.08; p = 0.18)\". cox_models.csv gives 0.857 (0.682–1.076), p = 0.183, which matches my own Cox fit."
+    },
+    {
+     "text": "The answer either fits a Cox model adjusted for stage and age (CD8 hazard ratio per 1 SD about 0.85, 95% CI about 0.68 to 1.07) or states that independent prognostic value cannot be assessed without such a model, and the results text it drafts does not call CD8 an independent favourable prognostic factor.",
+     "with_skill": true,
+     "with_evidence": "Reply: \"Adjusted for stage and age: HR 0.85 (0.68–1.07), p = 0.17\". cox_results.tsv gives 0.851 (0.677–1.071), p = 0.169. The drafted results text says \"These data therefore do not show that the CD8 signature score is an independent prognostic factor for overall survival.\"",
+     "without_skill": true,
+     "without_evidence": "Adjusted model in cox_models.csv: 0.851 (0.677–1.071), p = 0.169. Reply: \"HR is 0.85 per SD (0.68–1.07), p = 0.17\". The drafted results text says \"these data do not establish CD8 infiltration as an independent prognostic factor\", and the reply says \"I haven't written that high CD8 is an independent favourable prognostic factor\"."
+    },
+    {
+     "text": "In place of the searched cut-off, the answer presents a Kaplan-Meier comparison at a split fixed without reference to outcome, such as the median (60 versus 60 patients), and reports that it is not significant (log-rank p about 0.17).",
+     "with_skill": true,
+     "with_evidence": "km_median_split.png shows the median split at −0.098: CD8 low n = 60 (39 deaths) vs high n = 60 (34 deaths), subtitled \"Median split chosen without reference to outcome; log-rank p = 0.17\". Reply: \"The figure for the paper should be the median split. Your 0.607 cut is in a separate figure labelled exploratory.\" Results text: \"Kaplan-Meier curves for patients above and below the median score did not differ significantly (log-rank p = 0.17; Figure X)\". km_median_split.json gives 60/60 and p = 0.1725, with median OS 40.4 vs 34.1 months.",
+     "without_skill": false,
+     "without_evidence": "Only partly done. A reports a median-split log-rank p as non-significant: the reply says \"A median split gives p = 0.17\", and the results text gives \"HR 0.72, 95% CI 0.45–1.15; p = 0.17\". I confirmed this split is 60 vs 60 with p = 0.1725. But the median split is not presented in place of the searched cut-off. The only KM figure (km_cd8_cutoff_0.607.png), the KM group table (km_group_summary.csv) and the drafted 'Fig. X' are all the 0.607 split, and the reply suggests keeping the 0.607 plot in the paper. A produced no median-split KM curves or estimates. The results text cites 'Supplementary Fig. Y' for the median split, but that file (cutoff_diagnostics_and_continuous_cd8.png) has only the cut-off scan, bootstrap and spline panels. The 60 vs 60 group sizes are never stated."
+    }
+   ],
+   "grader_comparison": "Run B serves the researcher better, though both runs are strong. Both refuse the 'independent favourable prognostic factor' claim, quantify the search with a permutation p of about 0.13, and report the continuous Cox HR unadjusted (0.86) and adjusted (0.85). Only B replaces the searched cut-off with a prespecified median-split KM figure (60 vs 60, log-rank p = 0.17) as the paper's main figure and moves 0.607 to an exploratory supplement. A keeps the 0.607 plot as its only KM figure and gives the median split as one p-value, citing a supplementary figure that does not contain it, although A's extra bootstrap and correction-method checks are useful.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statement 5: 'In place of the searched cut-off' can be read two ways. It is unclear whether a median-split log-rank p reported next to a retained searched-cut KM figure (Run A) should count; I graded it strictly, as requiring the outcome-independent split to replace the searched one as the presented KM analysis.",
+    "Statements 1, 3 and 4 would pass for nearly any competent answer that declines the claim and fits the obvious Cox models. Statements 3 and 4 overlap, since both come down to fitting the per-SD Cox model, so none of the three separated these two runs.",
+    "Statement 2 offers two alternatives. Run A's 44% figure comes from permuting this dataset rather than simulating new cohorts, but both runs pass anyway on the permutation p of about 0.13."
+   ]
+  },
+  {
+   "skill": "response-biomarker-evaluation",
+   "case": "label-definition-sensitivity",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "Reports an AUC with a 95% confidence interval for CR/PR versus SD/PD among pre-treatment samples (18 responders and 38 non-responders, AUC about 0.82) and states how many responders and non-responders entered it.",
+     "with_skill": true,
+     "with_evidence": "The reply's headline is \"AUC 0.82 (95% CI 0.68–0.94; 18 responders vs 38 non-responders; permutation P < 0.001)\". It also says the comparison is \"CR/PR with SD/PD, uses baseline biopsies only\". results/primary.json shows n_pos 18, n_neg 38, AUC 0.8194 (0.684–0.937). I recomputed it from the input TSV and got the same: 0.8194 with 18/38.",
+     "without_skill": true,
+     "without_evidence": "The reply gives \"AUC for the abstract: 0.82 (95% CI 0.69–0.95). This uses the 56 patients with a pre-treatment biopsy and a known response: 18 responders (5 CR, 13 PR) and 38 non-responders (16 SD, 22 PD).\" The primary row in auc_results.tsv shows 18/38, AUC 0.819, DeLong CI 0.688–0.951 and bootstrap CI 0.681–0.936. Both match my recomputation (0.8194)."
+    },
+    {
+     "text": "States that the 8 NE patients were left out of the primary analysis and counted, and reports as a sensitivity analysis the AUC with NE counted as non-responders (about 0.83, 18 responders and 46 non-responders), rather than dropping or recoding NE silently.",
+     "with_skill": true,
+     "with_evidence": "The reply says the main analysis \"leaves out the NE patients\" and, under Labels and counts, \"Excluded: 8 NE\". Its table has the row \"NE counted as non-responders | 18 / 46 | 0.83 (0.70–0.94) | sensitivity\", and it notes the script's \"NE = 8 excluded\" warning is \"covered\" by that analysis. results/S1_NE_as_nonresponders.json shows 18/46, AUC 0.833. My recomputation gives 0.8327.",
+     "without_skill": true,
+     "without_evidence": "The reply says \"8 patients are NE (not evaluable). I left them out because their response is unknown. Counting them as non-responders (the intention-to-treat convention) gives 0.83, so the result holds either way.\" Its table row is \"Sensitivity: NE counted as non-responders | 64 | 0.83 (0.71–0.96)\". The reply gives only the total n=64, but the ne_as_nonresponder row in auc_results.tsv shows 18/46, AUC 0.833. sample_inclusion.tsv gives each NE patient's exclusion reason."
+    },
+    {
+     "text": "Keeps the 6 on-treatment biopsies out of the primary analysis (or analyses them separately) and explains that on-treatment samples can reflect the response itself.",
+     "with_skill": true,
+     "with_evidence": "Under \"6 samples are on-treatment, not baseline\" the reply lists MEL021/022/028/023/031/066. It says the three responder samples \"have the 1st, 2nd and 4th highest scores of all 70... That fits the score reflecting the response itself rather than predicting it. I left all six out of the main analysis; including them would push the AUC to 0.85.\" The primary run used data/cohort_baseline_only.tsv (64 rows). The on-treatment analysis is labelled \"do not use\".",
+     "without_skill": true,
+     "without_evidence": "Under \"Two groups are left out of that number\" the reply says: \"6 biopsies were taken on treatment, not at baseline (MEL021... MEL066). The three from responders have the 1st, 2nd and 4th highest scores of all 70... So these scores partly reflect the response rather than forecast it. Including them raises the AUC to 0.85.\" The R script's primary subset is d$pre & ev. sample_inclusion.tsv marks the six as \"on-treatment biopsy (not baseline)\", and analysis_log.txt confirms ranks 1, 2 and 4."
+    },
+    {
+     "text": "Does not adopt the co-author's CR/PR-versus-PD analysis with stable disease dropped (AUC about 0.86) as the headline or abstract AUC, and explains that removing the middle category builds a contrast of extremes that overstates discrimination; if that AUC is shown, it is labelled as a sensitivity analysis.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"I kept the SD patients in\". It shows that 0.82 is the pair-weighted average of responders vs SD (0.76) and responders vs PD (0.86). I checked this: (288×0.760 + 396×0.862)/684 = 0.819. It argues that \"dropping SD sets up the same comparison of extremes\", citing spectrum bias (Lijmer 1999). It concludes: \"The SD-dropped AUC is 0.86 (0.73–0.97). It's fine as a labelled sensitivity analysis, but not as the headline.\" The table labels the row \"sensitivity only (extremes compared)\".",
+     "without_skill": true,
+     "without_evidence": "The reply says \"I kept SD in, as non-responders. Dropping SD gives 0.86, but that number is higher because of who is dropped\". It explains: \"A comparison of only the clearest outcomes overstates how well it works... (spectrum bias)\". It also notes \"SD is where the hard cases are. Responders vs SD gives 0.76; responders vs PD gives 0.86\". It advises: \"report it next to 0.82 as a labelled secondary analysis, never in place of it.\" The table labels the row \"SD excluded (not for the headline)\", and the file role is \"Exploratory only (spectrum-biased; report only next to primary)\". It uses the label \"secondary/exploratory\" rather than the word \"sensitivity\", but the number is clearly labelled and kept below the primary result."
+    },
+    {
+     "text": "Declines to write that the score predicts response or benefit from anti-PD-1 as such, explaining that a single-arm treated cohort cannot separate a predictive from a prognostic association and that the estimate needs independent validation.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"I'd also change 'predicts response to anti-PD-1' to 'was associated with response'\" and gives a suggested sentence using \"were associated with\". It also gives a limitations sentence: \"these single-arm data cannot distinguish a predictive from a prognostic association, and the estimate requires independent validation\". It notes that a predictive claim needs a comparator arm and a treatment × marker interaction, and that \"This is one cohort with no validation.\"",
+     "without_skill": true,
+     "without_evidence": "The reply says: \"I'd change the wording. Every patient got anti-PD-1, so this cohort can't show the benefit is specific to anti-PD-1. Inflamed melanomas may simply do better in general, whatever the treatment. Telling those apart needs a comparison group treated differently. This is also a single cohort, with no independent validation yet.\" Its suggested sentence uses \"was associated with objective response\". It explains the predictive-versus-prognostic distinction in plain words without using those two terms."
+    }
+   ],
+   "grader_comparison": "Both attempts pass all five statements, and every AUC they report matches my recomputation from the input (0.819, 0.833, 0.862, 0.852, 0.889). Attempt A serves the researcher slightly better for an abstract. It warns that the file is named synthetic and should not feed an abstract, gives a ready-to-paste limitations sentence in explicit predictive/prognostic terms, and shows that 0.82 is exactly the pair-weighted average of the responders-vs-SD and responders-vs-PD AUCs. Attempt B is shorter and adds a figure, a per-patient inclusion log and an ordinal-trend analysis, but never mentions that the data are synthetic.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statements 1 and 3 cover basic choices that any careful answer makes (CR/PR vs SD/PD on baseline samples; on-treatment biopsies set aside). Both attempts pass, so these two don't separate the runs.",
+    "Statement 2: the parenthetical '(18 responders and 46 non-responders)' doesn't say whether the reply must give that split. Attempt B's reply gives only n=64; the 18/46 split appears only in its auc_results.tsv.",
+    "Statement 4: 'labelled as a sensitivity analysis' is ambiguous when an attempt labels the SD-dropped AUC 'secondary', 'exploratory' or 'not for the headline' instead, as Attempt B does.",
+    "Statement 5: it isn't clear whether the words 'predictive' and 'prognostic' are required. Attempt B explains the distinction in plain words without them.",
+    "No statement checks the good-result point that the data file is synthetic. Attempt A flagged this and Attempt B did not, which is the clearest real difference between the runs, and it goes ungraded."
+   ]
+  },
+  {
+   "skill": "single-cell-patient-level-stats",
+   "case": "paired-composition-on-treatment",
+   "with_skill": {
+    "passed": 6,
+    "total": 6
+   },
+   "without_skill": {
+    "passed": 5,
+    "total": 6
+   },
+   "statements": [
+    {
+     "text": "The analysis compares on-treatment with pre-treatment values within each patient (for example a Wilcoxon signed-rank test on per-patient differences in proportion); it neither treats the two timepoints as independent groups nor tests cell counts pooled across patients with a chi-square or Fisher test.",
+     "with_skill": true,
+     "with_evidence": "The stated test is an \"exact two-sided Wilcoxon signed-rank on each patient's change in proportion, 5 pairs\". composition_paired.json has \"mode\": \"paired\", with pairs P1–P5 matching on to pre. Under \"Two shortcuts I did not take\" the reply lists \"Pooling cells into a chi-square or Fisher test: this gives tiny p-values because it counts cells, not patients.\"",
+     "without_skill": true,
+     "without_evidence": "da_analysis.R computes each patient's on-minus-pre logit share (`dl <- lg[k, on_ids] - lg[k, pre_ids]`) and runs `t.test(dl)`, which is a paired test. The sensitivity GLM and eBayes models both include a patient term. The reply rejects pooling outright: \"Pooling cells into a Fisher or chi-square test gives P ≈ 1e-45 for CD8. That's pseudoreplication, so don't use it.\" No reported result depends on a pooled or unpaired test."
+    },
+    {
+     "text": "The response states that patient P6 has no on-treatment sample and is left out of the paired comparison, which therefore rests on 5 patients.",
+     "with_skill": true,
+     "with_evidence": "The reply says: \"P1–P5 have pre and on samples... P6 has only a pre-treatment sample, so it is left out of the test, not mixed in as an extra sample.\" It also says \"With only 5 patients who have both biopsies\". The JSON has \"incomplete_pairs\": [\"P6\"] and \"n_pairs\": 5.",
+     "without_skill": true,
+     "without_evidence": "The methods line reads \"(n = 5; P6 had no on-treatment biopsy and was excluded)\". The run log says \"Complete pre/on pairs: 5 (P1, P2, P3, P4, P5); excluded patients: P6\". The figure caption says \"excluded, no on-treatment sample: P6\"."
+    },
+    {
+     "text": "The response states that with 5 pairs an exact two-sided signed-rank test cannot give a p-value below 0.0625, so no cell type can reach p < 0.05 with that test.",
+     "with_skill": true,
+     "with_evidence": "The reply says: \"With only 5 patients who have both biopsies, the smallest p-value an exact two-sided test can return is 0.0625, so nothing can reach p < 0.05.\" The legend line repeats \"smallest attainable p = 0.0625\", and the JSON notes say the same.",
+     "without_skill": true,
+     "without_evidence": "The reply says: \"A Wilcoxon test can't help with 5 pairs. Its smallest possible P is 0.0625, whatever the data.\" The log says \"Smallest attainable exact Wilcoxon P with 5 pairs: 0.062\", and the script header gives the floor as 2/2^n, two-sided. The floor is stated correctly. However, A cites it as the reason to switch to a paired t-test, not as a limit on what can be called significant."
+    },
+    {
+     "text": "For CD8_T the response reports that the proportion was higher on treatment in 5 of 5 complete pairs, together with an effect size on the proportion scale (for example a median or Hodges-Lehmann increase of roughly 8 percentage points).",
+     "with_skill": true,
+     "with_evidence": "The reply says CD8 was a \"larger share ... in 5 of 5 patients (median 9.0% before vs 16.4%)\". The table row reads \"+8.1 pp | 5/5 up\", and the results sentence gives a \"Hodges-Lehmann shift +8.1 percentage points\". My recomputation gave HL = median difference = 0.0810.",
+     "without_skill": true,
+     "without_evidence": "The reply says CD8 share \"rose in all 5 paired patients, about 1.9-fold (median 9.0% → 16.4%)\", and the table shows \"5/5\" up. da_results.tsv has mean_change_pct_points = 7.824 for CD8_T. The pass is weaker than it could be: the reply gives group medians (an implied +7.4 pp) and a fold change, not a paired median or Hodges-Lehmann shift in percentage points."
+    },
+    {
+     "text": "The response cautions that the lower myeloid proportion on treatment may be a compositional consequence of the CD8_T increase (proportions sum to one) rather than evidence that myeloid cells were depleted, for example by noting that myeloid cell numbers barely change or by comparing against a reference cell type.",
+     "with_skill": true,
+     "with_evidence": "The reply says: \"That drop goes away when myeloid cells are compared with B or CD4 T cells instead of with all immune cells. It is most likely a side effect of the CD8 rise (proportions must add to 100%), not a real loss of myeloid cells.\" sensitivity/alr_ref_B.tsv backs this up: myeloid is 2 up / 3 down, p = 0.8125, and the CD4_T reference gives the same.",
+     "without_skill": true,
+     "without_evidence": "The reply says: \"The myeloid and CD4+ shares also dip at nominal P < 0.05, but that's a compositional artifact. Shares add up to 100%, so more CD8 cells push every other share down. When CD8 cells are taken out of the denominator, myeloid (P = 0.89) ... don't change. I wouldn't describe them as decreasing.\" Panel B of the figure shows this composition check. Raw myeloid counts do barely move (900→880, 1000→950, 500→520, 1700→1500, 400→430)."
+    },
+    {
+     "text": "The results sentence the response proposes does not call the CD8_T change (or any other cell-type change) statistically significant; it reports the CD8_T increase with its direction count or effect size and labels it exploratory or preliminary.",
+     "with_skill": true,
+     "with_evidence": "The sentence reads: \"In an exploratory paired analysis of five patients, CD8+ T cells made up a larger share ... in all five (median 9.0% vs 16.4%; Hodges-Lehmann shift +8.1 percentage points; exact two-sided Wilcoxon signed-rank p = 0.0625, the smallest value attainable with five pairs; Benjamini-Hochberg q = 0.19...)\". It makes no claim of significance.",
+     "without_skill": false,
+     "without_evidence": "The proposed sentence never calls the finding exploratory or preliminary. It opens with \"increased in all five paired patients (median 9.0% to 16.4%; paired t-test on logit-transformed proportions, P = 0.016; FDR = 0.094...)\" and goes on to quote P = 0.035 and 0.048 for myeloid and CD4+ T. It never uses the word \"significant\", but it presents nominal P < 0.05 values from n = 5 as the headline. This is the t-test trap the task anticipates. The direction count and effect size are there; the exploratory label is missing."
+    }
+   ],
+   "grader_comparison": "Attempt B serves the researcher better. Both attempts pair by patient, drop P6, and explain the lower myeloid share as a compositional effect. B also gives honest exact signed-rank p-values for the figure (CD8 p = 0.0625, q = 0.19), a paired effect size of +8.1 pp, and a results sentence marked exploratory. Attempt A makes a paired t-test on logit shares its headline (CD8 P = 0.016; myeloid and CD4 also nominally below 0.05), so its figure and results sentence will read as significant with n = 5 and no exploratory label, despite its FDR caveat and careful extra checks.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "1 (paired comparison, no pooled test): any reasonably careful answer passes it, and both attempts do.",
+    "2 (P6 left out, 5 pairs): any careful answer passes it, and both attempts do.",
+    "3 (0.0625 floor): it passes even when the floor is cited only as a reason to switch to a paired t-test that can reach p < 0.05, as Attempt A does. It doesn't check whether the attempt actually respected the limit.",
+    "4 (CD8 5/5 plus effect size): 'effect size on the proportion scale' is ambiguous. It is unclear whether group medians (9.0% → 16.4%) or a fold change count, or whether a paired median or Hodges-Lehmann shift in pp is required. Attempt A passes only under the looser reading."
+   ]
+  },
+  {
+   "skill": "spatial-neighborhood-statistics",
+   "case": "cd8-tumor-compartments",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "The response reports that the CD8 T cell to tumour cell depletion largely disappears when labels are permuted within the Tumor and Stroma regions (or when each region is analysed separately), and concludes that compartment composition explains most of the unstratified depletion.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"When I shuffle labels only within tumour and only within stroma, CD8–tumour adjacency is at chance level in every patient\" and \"this is explained entirely by where they sit\". In table1_cd8t_tumor_per_patient.tsv, whole-ROI log2 O/E is -1.29, -0.73, -0.82, -0.86 (p 0.0002-0.001) and within-region log2 O/E is 0.00, +0.07, -0.14, +0.29 (p 0.27-1.0). The paper paragraph says \"This depletion reflected the compartmental distribution of CD8+ T cells\". I recomputed the 25 µm numbers from the raw table and got the same pattern (within-region log2 O/E +0.41, +0.11, -0.24, +0.15).",
+     "without_skill": true,
+     "without_evidence": "The reply says \"Once you allow for the fact that CD8 T cells sit in the stroma and tumour cells sit in the tumour regions, the effect disappears.\" Compartment-restricted O/E is 1.33, 1.08, 0.85, 1.11 (p 0.22-0.76), against 0.54, 0.61, 0.52, 0.47 for the standard test. It also says \"Region alone explains the CD8 result. Region composition predicts 65 CD8–tumour contacts against 68 observed; the standard test expected 128.\" cd8_tumor_deficit_decomposition.tsv shows compartments explain 80-129% of the deficit in each ROI. My recomputation matches."
+    },
+    {
+     "text": "The response treats each of the four patients as one replicate and states that four patients cannot give a cohort-level two-sided p below 0.05 with an exact sign test (the smallest possible value is 0.125), or gives an equivalent explanation of why no cohort-level significance claim is possible.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"Each patient counts as one replicate\" and \"With 4 patients, no cohort-level test can reach p < 0.05: the exact sign test can't go below 0.125\". The table row reads \"sign test 0.125 (lowest possible)\", and the paragraph says \"exact two-sided sign test P = 0.125, the minimum attainable with four patients\". It warns against a pooled 320-cell p and against Fisher/Stouffer combination, and notes that 6/6 patients are needed (p = 0.031). One small overstatement: \"no cohort-level test\" is too broad, since a t-test on four log ratios could go below 0.05. The sign-test explanation itself is correct.",
+     "without_skill": true,
+     "without_evidence": "The reply says \"The per-ROI p-values describe how cells are arranged within each ROI, not differences between patients. With 4 patients, a patient-level sign test can't go below p = 0.125. That's why the paragraph calls the findings descriptive.\" cd8_tumor_patient_level.tsv uses n_patients = 4 (sign test 0.125, Wilcoxon 0.125). Weakness: the results paragraph leads with a pooled ROI-stratified permutation p (<0.001) and leaves out the sign test, without saying the pooled p is not a patient-level inference. It also gives a t-based 95% CI over 4 patients for the density ratio."
+    },
+    {
+     "text": "The response states the neighbourhood in micrometres (converting the pixel coordinates with the 0.5 um pixel size) and reports a sensitivity analysis with a second neighbourhood definition (another radius or another k), saying whether the conclusion changes.",
+     "with_skill": true,
+     "with_evidence": "The primary graph is a symmetric 6-NN graph with edges longer than 1.8x the median NN distance (30-31 µm) removed; the longest edge is 31 µm. Coordinates are converted at 0.5 µm/px (run_all.sh --um-per-unit 0.5; Methods: \"converted to micrometres (0.5 µm per pixel)\"). Sensitivity runs used 25 µm and 35 µm radii, and the reply says \"the same pattern holds\" (25 µm: whole ROI -0.70 to -1.07, within region -0.24 to +0.39). The paragraph says \"Conclusions were unchanged with 25-µm and 35-µm radius neighbourhoods.\" These numbers match cd8t_tumor_all_analyses.tsv and my recomputation.",
+     "without_skill": true,
+     "without_evidence": "The primary graph is a 25 µm radius with PIXEL_UM = 0.5 (nhood_enrichment.R; Methods: \"converted to micrometres (0.5 µm per pixel)\"). Sensitivity runs used 20, 30, 40 and 50 µm radii, a 6-NN graph and Delaunay. The reply says \"No radius or neighbour definition shows avoidance under the compartment-restricted test (all pooled p ≥ 0.35)\", and the paragraph says \"This held for neighbourhood radii of 20–50 µm and for k-nearest-neighbour and Delaunay graphs.\" cd8_tumor_sensitivity_neighbourhood_definition.tsv confirms this: pooled compartment-restricted p is 0.353-0.785 and no per-ROI p is below 0.05. I recomputed 40 µm and it matches."
+    },
+    {
+     "text": "The response does not present the result as evidence of an immune-exclusion mechanism or of cells actively avoiding each other; it describes spatial segregation or association and says what further evidence a mechanism would need.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"They don't support 'CD8 T cells avoid tumour cells', and nothing here tests a mechanism\", and its Wording section lists \"Not supported: 'avoid', 'exclusion mechanism'\". It calls the finding \"segregation by compartment\". The paragraph ends \"largely confined to the stroma, but we found no evidence that they avoid tumour cells beyond this compartmental segregation\". On mechanism it says: \"That needs evidence beyond spatial association, for example stromal barrier markers, CD8 functional state, or perturbation experiments.\"",
+     "without_skill": true,
+     "without_evidence": "The reply says \"I'd drop 'avoid' and 'mechanism': a single spatial snapshot can't show a mechanism\". The paragraph describes an \"immune-excluded distribution, largely confined to the stroma, with no evidence of additional avoidance of tumour cells within compartments\". manuscript_text.md adds: \"A static spatial snapshot cannot identify a mechanism, such as a stromal or ECM barrier, chemokine gradients or TGF-β signalling\" and \"need confirmation in a larger cohort\". The further-evidence part is weaker than A's: it appears only in manuscript_text.md and names candidate mechanisms rather than the kinds of evidence (markers, functional or perturbation data) needed to test them."
+    },
+    {
+     "text": "The response reports a separate effect estimate (such as observed versus expected contacts or a log ratio) for each of the four patients rather than one p-value obtained by pooling all cells.",
+     "with_skill": true,
+     "with_evidence": "The reply table and table1_cd8t_tumor_per_patient.tsv give, for each patient, observed vs expected tumour neighbours per CD8T (e.g. P1 0.94 vs 2.34) and log2(O/E) under both nulls (whole ROI -1.29, -0.73, -0.82, -0.86). The reply explicitly says not to report a p from pooling all 320 cells.",
+     "without_skill": true,
+     "without_evidence": "The reply table gives per-patient O/E and p under both nulls: standard 0.54, 0.61, 0.52, 0.47; compartment-restricted 1.33, 1.08, 0.85, 1.11 (cd8_tumor_enrichment_primary.tsv). It also reports a pooled ROI-stratified estimate (O/E 0.53, p < 0.001; 1.04, p = 0.71), but alongside the per-patient values, not instead of them."
+    }
+   ],
+   "grader_comparison": "Both runs pass all five statements and reach the same result, which I verified from the raw table: CD8T–Tumor contacts are depleted when labels are shuffled over the whole ROI (log2 O/E about -0.7 to -1.1 at 25 µm), and the depletion disappears when labels are shuffled within region. A serves the researcher somewhat better for the paper. Its paragraph keeps inference at the patient level (sign test 0.125, no pooled p), and it says explicitly what a cohort-level claim (at least 6 patients, realistically 10+) and a mechanistic claim (barrier markers, CD8 functional state, perturbation) would need. B has richer deliverables (figures, a reviewer reply, more neighbourhood definitions, distance and density read-outs), but its paragraph leads with a pooled p < 0.001 that a reviewer could read as cohort-level significance, and it names mechanism evidence only implicitly.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statement 5 does not separate the runs. B puts a pooled ROI-stratified p < 0.001 in its results paragraph, but the wording ('rather than one p-value obtained by pooling all cells') passes any response that reports per-patient effects alongside a pooled p.",
+    "Statement 2 is ambiguous when a response states the sign-test floor but also reports a pooled cell-level (ROI-stratified) p in the paper paragraph. It does not say whether that breaks 'treats each of the four patients as one replicate'.",
+    "Statement 4's last clause ('says what further evidence a mechanism would need') is ambiguous to grade in two cases: when a response names candidate mechanisms a snapshot cannot identify (B: ECM barrier, chemokine gradients, TGF-β) rather than evidence types, and when that text sits only in an output file rather than the reply.",
+    "Statement 3 passes for almost any answer that converts to µm and tries a second radius. It does not test the more discriminating point from the rubric, that the radius must exceed the ~17 µm median nearest-neighbour distance; at 17 µm about half the cells are isolated.",
+    "Statement 1 would pass for any answer that runs a region-stratified null on this table, because the effect disappears so completely. It does not separate competent runs."
+   ]
+  },
+  {
+   "skill": "tcr-repertoire-metrics",
+   "case": "single-cell-pre-post",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 2,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "TRA and TRB contigs are not pooled into one clonotype distribution: metrics are computed for TRB, for each chain separately, or for paired alpha-beta clonotypes.",
+     "with_skill": true,
+     "with_evidence": "\"只分析TRB链。TRA和TRB合在一起算会把每个细胞计两次，所以TRA只作为补充检查。\" run_analysis.sh runs the main metrics with --chain TRB. TRA is analysed separately as a supplement in TRA_metrics_no_dual_alpha_downsample_min_supplementary.json.",
+     "without_skill": true,
+     "without_evidence": "The main clonotype is defined per cell as an αβ-paired CDR3 anchored on β: \"克隆型按 αβ 配对的 CDR3 氨基酸序列定义，以 β 链为准\". clonotype_definitions.csv describes it as \"Paired TRA+TRB CDR3aa, beta-anchored\", and cells_clonotypes.csv gives each cell one clonotype. A TRB-only sensitivity analysis (\"只看 TRB\") is also reported, and diversity_metrics.csv trb_only gives the same 26/37 clonotypes and Shannon 3.20 vs 2.88. TRA and TRB contigs are never pooled as separate clonotypes."
+    },
+    {
+     "text": "Clone size is the number of distinct cells (barcodes) per clonotype, not UMI counts or contig rows, and only productive contigs are used: for TRB the answer reports 30 pre-treatment cells in 26 clonotypes and 80 post-treatment cells in 37 clonotypes (or the corresponding cell numbers if paired alpha-beta clonotypes are used).",
+     "with_skill": true,
+     "with_evidence": "The reply states \"克隆大小按不同barcode（细胞）计数，不按contig行数，也不按UMI\", \"只保留productive contig。去掉的非productive TRB contig：治疗前1条，治疗后3条\" and \"深度：治疗前30个细胞、26个克隆型；治疗后80个细胞、37个克隆型\". The qc block in TRB_metrics_downsample_min.json shows pre cells 30, clonotypes 26, dropped_nonproductive 1, and post cells 80, clonotypes 37, dropped_nonproductive 3. This matches my own recount.",
+     "without_skill": true,
+     "without_evidence": "The reply table gives \"细胞数（至少 1 条 productive 链）| 30 | 80\" and \"克隆型数 | 26 | 37\". It also states \"按细胞计数，不按 contig 行计数。212 条 productive contig 对应 110 个细胞\", \"去掉了 4 条非 productive 的 contig\" and \"克隆大小用细胞数，不用 UMI 加权\". diversity_metrics.csv (primary and trb_only) shows n_cells 30/80 and n_clonotypes 26/37. My own recount from the contig table (TRB, productive only, distinct barcodes) gives the same 30/26 and 80/37."
+    },
+    {
+     "text": "Diversity is compared at an equal number of cells (post subsampled to the 30 pre cells, with repeats), and the answer reports that at equal cell number post has fewer TRB clonotypes than pre (about 17 versus 26) even though its raw count is higher (37 versus 26).",
+     "with_skill": true,
+     "with_evidence": "The reply says \"两个样本都无放回下采样到30个细胞…重复100次，seed = 1\". Its table row is \"克隆型数 | 26 | 17.0 [13–21] | 37\", and the text says \"全部数据下，治疗后的克隆型数（37）比治疗前（26）还多…在同样深度下，治疗后的克隆型其实更少（17对26）\". The JSON gives post richness at 30 cells as mean 16.98 (2.5–97.5%: 13–21), Shannon 2.41 and clonality 0.150. My own 10,000-repeat check gives 17.05, 2.43 and 0.142.",
+     "without_skill": false,
+     "without_evidence": "Only partly done. The subsampling is there: \"从治疗后样本中随机抽 30 个细胞，重复 10,000 次\" (the R script samples without replacement, N_RAREFY 10000, seed 20261120), and it reports Shannon 2.43 and clonality 0.142 at 30 cells. But the reply never gives the clonotype count at 30 cells. Its table lists only the raw \"克隆型数 | 26 | 37\", so a reader would think post has more clonotypes. The equal-depth value (17.06, 95% 13–21) appears only as a row in diversity_metrics.csv. It is never stated or interpreted, and the figure has no clonotype-count panel."
+    },
+    {
+     "text": "The answer reports the share of cells in expanded clonotypes (at least 2 cells) at both time points: about 23% before treatment and about 55% to 63% after.",
+     "with_skill": true,
+     "with_evidence": "The reply table row is \"≥2个细胞的克隆型所占细胞比例 | 23%（3个克隆型） | 54% [40–68%] | 63%（7个克隆型）\". The JSON expanded_fraction values are 0.2333 pre, 0.5447 post at 30 cells and 0.625 post at full depth. My recount gives 7/30 = 23.3%, 50/80 = 62.5% and about 54.9% at 30 cells.",
+     "without_skill": false,
+     "without_evidence": "The reply never states what share of post-treatment cells are in expanded clonotypes. For pre it only says \"其中 77% 是只出现一次的克隆（Good's coverage 0.23）\", which implies 23% by subtraction. For post it lists per-clone counts (25/80, 10/80, five clones of 3) that the reader would have to add up. The value was computed: diversity_metrics.csv has frac_cells_in_expanded of 0.233 pre, 0.625 post and 0.549 at 30 cells, and figure panel C shows singleton bars of 77% vs 38%. It is not reported in the written answer."
+    },
+    {
+     "text": "The answer states that with a single patient the pre/post change is descriptive and cannot by itself support a statistical test or a conclusion about response to treatment.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"不过只有一位患者，治疗前也只有30个细胞，所以这只是描述性结果，没有做统计检验\" and, in the statistics section, \"只有一位患者，每个时间点一个样本，而分析单位是患者，所以只做描述，不做检验。不能把细胞或下采样重复当作独立样本来算p值\". It also says \"仅供科研分析，不能用于个体患者的临床判断\". Treatment response is covered by this clinical-judgment disclaimer, not by naming response (反应) directly.",
+     "without_skill": false,
+     "without_evidence": "The reply runs cell-level tests and presents them as evidence: \"置换检验…Shannon 差值为 −0.77，p = 0.004…克隆性差值为 +0.125，p = 0.012\" and \"CT001…Fisher 检验 q = 0.002，是唯一单独达到显著的克隆\". Its caveat (\"只有一位患者，每个时间点一份组织。结论只适用于这两份样本。p 值只反映抽到哪些细胞带来的随机性…也不能推广到其他患者\") limits how far the result generalises. It never calls the change descriptive or says a test is not supported; it does the opposite. It also says nothing about what the result means for treatment response."
+    }
+   ],
+   "grader_comparison": "Attempt B serves the researcher better. Its Chinese reply states every key result: TRB only; 30 cells/26 clonotypes pre and 80/37 post; 17 vs 26 clonotypes at 30 cells despite 37 raw; expanded-cell share rising from 23% to 54% (63% at full depth). It also treats the single-patient change as descriptive and runs no tests. Attempt A's numbers are correct and its analysis is broader (β-anchored paired clonotypes, 10,000 subsamples, five clonotype definitions). But its reply leaves out the equal-depth clonotype count and the post expanded-cell share, which exist only in a CSV, and it presents cell-level permutation and Fisher p-values as significance in a one-patient design.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statements 1 and 2 pass for both attempts, so they do not tell this pair apart: both avoid pooling chains and both count productive-only cells, giving 30/26 and 80/37.",
+    "Statements 3 and 4 depend on whether a value that appears only in an output CSV counts as 'the answer reports'. Attempt A's diversity_metrics.csv has the clonotype count at 30 cells (17.06) and frac_cells_in_expanded (0.233/0.625/0.549), but its written reply does not state them. I graded on the written reply.",
+    "Statement 5 bundles two claims: the change is descriptive with no statistical test, and it cannot support a treatment-response conclusion. It is unclear whether a general 'not for clinical judgment' disclaimer satisfies the second part, and whether an attempt that reports p-values with a single-patient caveat deserves partial credit."
+   ]
+  },
+  {
+   "skill": "tme-bulk-profiling",
+   "case": "melanoma-tpm-phenotypes",
+   "with_skill": {
+    "passed": 5,
+    "total": 5
+   },
+   "without_skill": {
+    "passed": 2,
+    "total": 5
+   },
+   "statements": [
+    {
+     "text": "The response identifies that expression_tpm.tsv is already log-scaled (values top out near 13 and none exceed 50) even though it is called TPM, and it does not apply a second log2 transform before scoring.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"The TPMs are already on a log scale, so I didn't log them again. Values run from 0.8 to 12.7\" and notes that linear ACTB at about 12 TPM \"isn't plausible\". It scored with log=False. matrix_check.json shows max 12.676, max_above_log_bound false (\"maximum at most 50\"), integer_valued false and SCALE_LOG. In score_tme.py the primary run uses transform=None; the double log appears only as a sensitivity check. My own recomputation gives max 12.676 and 0 values above 50.",
+     "without_skill": true,
+     "without_evidence": "The reply says \"I didn't log-transform, because the file is already log2(TPM+1). Values run from 0.8 to 12.7... Linear TPMs would span several orders of magnitude.\" run_log.txt shows \"max 12.676; values > 20: 0\" and \"DECISION: values are already on a log2(TPM+1) scale -> NOT log-transforming again.\" In tme_phenotype_scoring.R, E <- X is the analysis matrix; E_doublelog is used only as a sensitivity check."
+    },
+    {
+     "text": "The response explains that tmelens-style calls label the top third of the infiltration axis as inflamed, so the inflamed percentage (4 of 12) is set by the threshold and cannot be reported as the cohort's prevalence of inflamed tumours.",
+     "with_skill": true,
+     "with_evidence": "Section 3 says \"It comes out at 4 of 12 (33%), but tmelens calls the top third of the cohort inflamed by definition. Any 12 tumours with distinct scores give exactly 4\", and \"the number says nothing about how often your melanomas are inflamed\". The rule is given as \"at or above its 2/3 quantile (0.44)\". phenotype_run.json records inflamed_count_fixed_by_rule = 4. My recomputation matches the 0.4405 threshold and the 4 inflamed samples.",
+     "without_skill": false,
+     "without_evidence": "Only partly done. B never states that the tmelens rule labels the top third inflamed; it says \"I had tmelens's exported gene lists but not its scoring code or cut-offs\" and uses its own mean-split rule. Its headline is \"4 to 6 of the 12 tumours (33–50%)\" and \"6/12 (50%; 95% CI 25–75%)\". inflamed_fraction_by_rule.tsv gives Wilson CIs, which present the figure as an estimate. It does say \"cut-offs... largely decide the answer\" and \"this isn't a prevalence\", but it never identifies 4/12 as the tmelens result fixed by its top-third rule."
+    },
+    {
+     "text": "The response reports that only 7 of the 19 Pan_F_TBRS genes are in the matrix, below the 50% coverage tmelens requires, so that signature is dropped and the stromal axis rests on CAF_core alone.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"Pan_F_TBRS (the TGF-beta signature): 7/19 genes (37%). That is below tmelens' 50% rule, so tmelens drops it without warning. The stromal score is therefore CAF_core alone\" and lists the 12 missing genes. phenotype_run.json has stromal_axis_members [\"CAF_core\"], and signature_scores_zscore.tsv has Pan_F_TBRS = NA. signature_coverage.json flags it at coverage 0.3684.",
+     "without_skill": false,
+     "without_evidence": "B reports \"Only 7 of 19 Pan-F-TBRS genes are there\" and lists the missing genes. It never mentions the 50% tmelens coverage rule and does not drop the signature. tme_phenotype_scoring.R sets stroma_sets <- c(\"Pan_F_TBRS\", \"CAF_core\") with no coverage filter. signature_scores.tsv carries a 7-gene Pan_F_TBRS score (for example, MEL01 7.071) that feeds stroma_axis_z. \"in practice you have one stroma measure\" is not the same as the axis resting on CAF_core alone."
+    },
+    {
+     "text": "The response states that an excluded call from bulk RNA (low T-cell signal with high stromal signal) cannot show that T cells are kept out of the tumour bed in MEL03, and it recommends a spatial assay such as CD8 immunohistochemistry or multiplex immunofluorescence to test that statement.",
+     "with_skill": true,
+     "with_evidence": "Section 4 says \"MEL03 is called excluded, but that doesn't show its T cells are kept out of the tumour bed... bulk RNA has no spatial information. 'Excluded' only says MEL03 has the second-lowest T-cell/cytotoxic signal and the highest fibroblast (CAF) signal\". It recommends \"CD8 IHC with a melanocytic co-stain (SOX10 or Melan-A) to outline the tumour bed, or multiplex IF, on the MEL03 block\".",
+     "without_skill": true,
+     "without_evidence": "The reply says \"I'd still leave out 'the T cells are kept out of the tumour bed': No spatial information. Bulk RNA can't show where T cells sit. 'Excluded' here only means few T-cell transcripts plus many stromal transcripts.\" It ends with \"The spatial claim needs CD8 IHC or multiplex IF that scores tumour nests and stroma separately.\""
+    },
+    {
+     "text": "The response states that the phenotype labels (and any z-score based scores) are relative to these 12 samples and would change if samples were added or removed.",
+     "with_skill": true,
+     "with_evidence": "The reply says \"Both scores are relative to these 12 samples only. *MEL11 becomes inflamed if any one of the four inflamed tumours is left out.\" and \"Each gene is standardised across these 12 samples, so every score is relative to this cohort\". Under Limits it says \"Cohort-relative labels: they move when samples are added or removed\". immune_phenotype_calls.tsv has a leave_one_out_changes column that shows this.",
+     "without_skill": false,
+     "without_evidence": "Only partly done. B says \"the cut-offs are relative to this cohort, they largely decide the answer\" and that scores are \"z-scored across the 12 tumours\". It never states that the labels or z-scores would change if samples were added or removed. There is no leave-one-out or add/remove discussion in the reply or in the output files."
+    }
+   ],
+   "grader_comparison": "Run A serves the researcher better. It applies the actual tmelens rule (Pan_F_TBRS dropped at 7/19 under the 50% rule, inflamed at the 2/3 quantile) and says plainly that 4/12 is fixed by design and not a prevalence. A leave-one-out check backs up its point that labels are cohort-relative, and it supplies grant-ready wording. Run B is equally sound on the log scale and on the MEL03 spatial caveat. But its headline is a 50% figure with a confidence interval from its own mean-split rule, its stroma axis still includes the under-covered Pan_F_TBRS, and it never says the labels would shift with the sample set. I recomputed both analyses, and every number in both runs checks out.",
+   "grader_preferred": "with skill",
+   "grader_notes_on_statements": [
+    "Statement 1 (log scale already applied) and statement 4 (MEL03 excluded call is not spatial; use CD8 IHC/mIF) passed for both runs, so they do not separate these two attempts. Both would still catch a naive answer that logs the data again or accepts the MEL03 sentence.",
+    "Statement 5 is borderline for Run B. B's \"cut-offs are relative to this cohort\" implies that the labels depend on the cohort, but it never states the added/removed-samples consequence that the statement requires. A lenient grader might pass it."
+   ]
+  }
+ ]
+}
