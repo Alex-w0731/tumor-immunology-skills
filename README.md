@@ -37,6 +37,20 @@ A capable coding agent already knows what a Cox model, a UMAP or a deconvolution
 
 Each skill in this repository carries the rule, the reason for it, a tested script for the calculation, and the primary source, so that both the agent and you can check the work. They are written for research use and stay with analysis, statistics, interpretation and reporting.
 
+## What changes with a skill
+
+From the first blind comparison: one eval case per skill, the same model with and without the skill, graded by an agent that did not know which run was which. Details and caveats are in [docs/evals.md](docs/evals.md).
+
+| Situation in the eval | Without the skill | With the skill |
+|---|---|---|
+| The "best" cut-off of a CD8 score gives log-rank p = 0.008 | Kept the outcome-selected split as the paper's only Kaplan-Meier figure | Median split as the figure (log-rank p = 0.17); the searched cut-off gets a search-adjusted p of about 0.13 and goes to a separate figure labelled exploratory |
+| Cell-type shares before and on anti-PD-1 in 5 patients | Switched to a paired t-test that can reach P = 0.016 and led the results sentence with it | Exact signed-rank p = 0.0625, the smallest possible with 5 pairs, an effect of +8.1 percentage points, and a sentence labelled exploratory |
+| TCR repertoire of one patient, 30 cells before and 80 after | Cell-level permutation tests (p = 0.004) and raw clonotype counts (37 versus 26) | No tests on a single patient; at equal cell numbers the post sample has fewer clonotypes (17 versus 26) |
+| tmelens-style phenotypes for 12 tumours | Reported "4 to 6 of 12 inflamed (33-50%)" as an estimate with a confidence interval | 4 of 12 is fixed by the top-third rule, so it is not a prevalence; Pan_F_TBRS is dropped at 7 of 19 genes |
+| A GMT file that defines the same set name twice | Renamed both sets without saying which one a reader would have kept | A reader keyed by set name silently keeps the last (3-gene) definition; kept the 8-gene set and logged why |
+
+Across the nine cases, runs with the skill passed 48 of 48 graded statements and runs without passed 39 of 48, and the blind grader preferred the answer written with the skill in 9 of 9 cases. The model was already strong on its own: the skills earn their place at decision points like these.
+
 <a name="skills"></a>
 
 ## Skills
@@ -131,7 +145,7 @@ python3 skills/immune-survival-analysis/scripts/km_logrank.py --help
 | Scripts | Standard library only, no network unless declared, `--help` runs, unit tests with expected values derived by hand or from published worked examples. | [`tools/run_tests.py`](tools/run_tests.py), CI on Python 3.10 to 3.14 (Linux, macOS, Windows) |
 | Structure | Frontmatter, line budget, link targets, orphan files, eval layout, no machine-specific paths. | [`tools/validate_skills.py`](tools/validate_skills.py) |
 | Review | Each skill was drafted by one AI agent and then audited by a second, independent one that re-read the cited sources, recomputed script outputs and repaired what it found. | [`docs/verification.md`](docs/verification.md) |
-| Behaviour | Three eval cases per skill with objective graders, meant to be run with and without the skill. | `skills/<name>/evals/` |
+| Behaviour | Three eval cases per skill with objective graders, run with and without the skill. First blind run, one case per skill: 48/48 statements with the skill, 39/48 without. | [`docs/evals.md`](docs/evals.md), `skills/<name>/evals/` |
 
 The machine checks catch references that do not exist or that point at a different paper. They cannot prove that a paper supports the sentence it is cited for; that depends on review, and review can miss things. [`docs/verification.md`](docs/verification.md) says plainly what has and has not been checked. If you find an error, please open an issue with the source: corrections are the most valuable contribution here.
 
