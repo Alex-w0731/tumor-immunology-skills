@@ -1,14 +1,14 @@
 schema_version: "1.1"
 name: paired-composition-on-treatment
 expected_outcome: |
-  The agent compares on-treatment with pre-treatment proportions within patients (signed-rank test on
-  per-patient differences), notices that P6 has no on-treatment sample and leaves it out, so 5 pairs
-  remain. It reports CD8_T higher on treatment in 5 of 5 pairs with an effect size of about 8
-  percentage points (median and Hodges-Lehmann shift 0.081), explains that 5 pairs cannot give an
-  exact two-sided p below 0.0625 (BH q-values are higher still, 0.19 for CD8_T across six cell
-  types), and warns that the lower myeloid proportion is likely compositional: myeloid cell numbers
-  barely change, and a log-ratio to a stable reference such as B cells shows no consistent shift. The
-  suggested results sentence is exploratory and does not call any change significant, even though a
-  paired t-test on the same proportions would give p of about 0.02 for CD8_T.
+  The agent pairs samples within patients and leaves out P6, which has no on-treatment sample, so
+  5 pairs remain. For the figure it gives exact two-sided Wilcoxon signed-rank p-values: CD8_T has
+  p = 0.0625, the smallest value 5 pairs can produce (BH q = 0.19 across six cell types), and the
+  agent does not switch to a paired t-test (about p = 0.02 for CD8_T) to get below 0.05. It reports
+  the CD8_T rise as a within-patient Hodges-Lehmann shift of +8.1 percentage points (5 of 5 pairs
+  up) and a leave-one-patient-out check in which CD8_T stays higher in all five runs. It reads the
+  lower myeloid share (lower in 5 of 5 pairs) as compositional and backs this with a check, such as
+  the myeloid log-ratio to B or CD4_T cells (lower in only 3 of 5 pairs, p = 0.81). The proposed
+  results sentence labels the CD8_T increase exploratory.
 context:
   scaffold_script: place-files.sh

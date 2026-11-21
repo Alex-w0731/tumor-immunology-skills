@@ -15,7 +15,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: "Compares groups in single-cell data at the patient level: pseudobulk DE, composition tests, paired designs and few-patient limits."
   summary-zh: 单细胞组间比较的患者水平统计：伪bulk差异表达、细胞比例检验、配对设计与小样本边界
@@ -124,9 +124,11 @@ a patient random effect is a defensible alternative; a cell-level test without o
    decreases in the others, and testing each type separately can report those as changes;
    Wilcoxon and Poisson approaches do not address this [Buttner2021]. Word decreases as relative.
    Check with `--transform alr --reference TYPE`, choosing an abundant type with no expected
-   biological change; a shift that persists is a shift relative to that reference. This rank test
-   on a log-ratio is this skill's heuristic, not a published compositional method. For a formal
-   compositional model use scCODA, whose results are also relative to a reference type
+   biological change; a shift that persists is a shift relative to that reference. A check that
+   needs no reference: rerun with `--within` listing every type except the one that rose; a
+   decrease that disappears came from the denominator. Give the check's result, not only the
+   caveat. Both checks are this skill's heuristic, not published compositional methods. For a
+   formal compositional model use scCODA, whose results are also relative to a reference type
    [Buttner2021]. With covariates or more than two groups, use propeller (logit or arcsine square
    root transform, empirical Bayes linear models); in its simulations the logit transform
    controlled type 1 error better with 3 or 5 samples per group, arcsine with 10 or 20
@@ -216,6 +218,11 @@ conventions taken from the owner's breast-cancer-multiomics analysis plan, not p
   relative and run the log-ratio check.
 - Reading p above 0.05 at 3 vs 3 as "no difference". The floor is 0.1. Report the floor, effect
   sizes and direction counts.
+- Switching to a t-test or a logit model because the exact floor is above 0.05. That chooses the
+  test by its result, and a handful of patients cannot check a normality assumption. Keep the
+  prespecified test's p-value in the figure; show any other beside it as a labelled sensitivity
+  result. The claim follows the number of patients, not the test: a model p below 0.05 from so few
+  patients is still exploratory (heuristic).
 - Changing the cell threshold, denominator, test or cell-type merging after seeing results. The
   p-values lose their meaning. Fix choices first and report every sensitivity run.
 - Comparing proportions between samples dissociated, stored or sorted differently. Differences may

@@ -2,12 +2,13 @@ schema_version: "1.1"
 name: responder-zscore-ttest-zh
 expected_outcome: |
   The agent explains that the 30 ROIs are not 30 replicates: each patient's three ROIs are
-  summarised per patient or modelled with a random patient intercept, so the comparison is 5
-  versus 5 patients. It rejects comparing squidpy z-scores across ROIs because z grows with the
-  number of cells and edges, and recommends a comparable effect size such as log2
+  summarised per patient, with the spread of the three ROI values reported, or modelled with a
+  random patient intercept, so the comparison is 5 versus 5 patients. It rejects comparing squidpy
+  z-scores across ROIs because z grows with the number of cells and edges, and recommends log2
   observed/expected contacts per ROI averaged within patient, or a cell-number-weighted mixed
-  model. It requires correction across all 78 pairs and points out that with 5 versus 5
-  patients an exact rank-based test cannot give a two-sided p below 2/252 (about 0.008), so few
-  or no pairs can survive correction unless a small set of pairs is pre-specified. It states
-  that a difference in spatial association is not evidence of cell-cell interaction, raises
-  compartment confounding of the per-ROI null, and drafts a methods paragraph accordingly.
+  model. It points out that with 5 versus 5 patients an exact rank-sum test cannot give a
+  two-sided p below 2/252 (about 0.008), which is above the 0.05/78 (about 0.00064) that the
+  smallest p needs in a correction over 78 pairs, so a few pairs should be pre-specified. It names
+  explanations other than cell-cell interaction for a group difference (compartment composition,
+  cell density, segmentation errors at cell borders), warns that compartments drive the per-ROI
+  null and suggests permuting within compartments, and drafts a methods paragraph accordingly.

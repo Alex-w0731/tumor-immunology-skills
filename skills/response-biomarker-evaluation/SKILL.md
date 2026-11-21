@@ -15,7 +15,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Tests whether a biomarker separates immunotherapy responders from non-responders, with honest uncertainty and leakage checks.
   summary-zh: 评估生物标志物能否区分免疫治疗应答者与非应答者，含不确定性与信息泄漏检查。
@@ -78,9 +78,12 @@ patient.
    per patient shrink the interval falsely, so keep the prespecified pre-treatment sample.
    Use pre-treatment samples for the primary analysis; on-treatment biopsies can reflect the
    response itself (analyse them separately, if at all). Count responders, non-responders
-   and exclusions by reason; check that missing marker values are not concentrated in one
-   class (`rows.missing_score_by_class` in the output); note heavy ties (IHC categories,
-   integer counts).
+   and exclusions by reason, and save a per-patient inclusion table (patient, label, sample
+   timing, included or the reason for exclusion): it lets the researcher audit every count
+   and draw the participant flow diagram that STARD 2015 expects (item 19) [Bossuyt2015].
+   Check that missing marker values are not concentrated in one class
+   (`rows.missing_score_by_class` in the output); note heavy ties (IHC categories, integer
+   counts).
 
 4. **Estimate discrimination** with `scripts/roc_auc.py`. The AUC is the probability that a
    random responder scores on the response side of a random non-responder, ties counting
@@ -260,9 +263,11 @@ Question and claim type: <marker>, prespecified direction, endpoint, cohort(s); 
   (apparent) or validation.
 Labels: responder = ..., non-responder = ...; excluded: NE = n, other = n; criteria
   (RECIST 1.1 / iRECIST; confirmed or not); sample timing.
-Data checks: one sample per patient, baseline only, missing values by class, ties.
+Data checks: one sample per patient, baseline only, missing values by class, ties; the
+  per-patient inclusion table (file name).
 Result: AUC = 0.xx (95% CI 0.xx-0.xx; n = a responders, b non-responders; permutation p = ...).
-  Sensitivity analyses: NE as non-responders AUC = ...; clinical benefit AUC = ...
+  Sensitivity analyses, each with its own responder and non-responder counts: NE as
+  non-responders AUC = ...; clinical benefit AUC = ...
 Comparison (if any): difference = 0.xx (95% CI ...), DeLong p = ...; with cohorts: per
   cohort ..., within-cohort ..., pooled (descriptive) ...
 Threshold (only if prespecified): sensitivity x/n = 0.xx (exact 95% CI ...), specificity ...,

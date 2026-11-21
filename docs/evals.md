@@ -1,18 +1,34 @@
 # Eval results
 
-Each skill ships three eval cases in `skills/<name>/evals/`. For this first run, one case per
-skill was executed twice by fresh agents: once with the skill's `SKILL.md` to follow and once
-without it, each in its own folder whose path revealed neither the skill nor the configuration.
-A third agent graded both runs against the case's fixed statements without being told which run
-had the skill, reading the replies and the files each run produced.
+Each skill ships three eval cases in `skills/<name>/evals/`. A case is run twice by fresh
+agents, once with the skill's `SKILL.md` to follow and once without it, each in its own folder
+whose path reveals neither the skill nor the configuration. A third agent grades both runs
+against the case's fixed statements without being told which run had the skill, reading the
+replies and the files each run produced, and says which reply would serve the researcher better.
 
-- Date: 2026-11-20
-- Model for executors and graders: Claude Opus 5.5
-- Iteration 1; one run per configuration, so a difference of one statement is within noise.
+## Summary
 
-## Results
+| | Cases | Statements passed with the skill | Statements passed without | Grader preferred the reply with the skill |
+|---|---|---|---|---|
+| Iteration 1 (2026-11-20) | 9 | 48/48 (100%) | 39/48 (81%) | 9 of 9 |
 
-| Skill | Case | With skill | Without skill | Grader preferred overall |
+One run per configuration and case, so a difference of one statement is within noise. Executors
+and graders used the same model (Claude Opus 5.5).
+
+## How to read this
+
+- The baseline is strong. A current frontier model working without the skill already passes
+  most statements, so the skills add value mainly at specific decision points, listed below
+  wherever the two runs differed.
+- The statements were written together with the skills, so they reward what the skills teach.
+  The grader did not know which run had the skill, but the cases were not designed by a party
+  independent of the skills.
+- Graders flag statements that every reasonable answer passes; those are rewritten between
+  iterations, so statements are not comparable across iterations.
+
+## Iteration 1
+
+| Skill | Case | With skill | Without skill | Grader preferred |
 |---|---|---|---|---|
 | [`citation-evidence-check`](../skills/citation-evidence-check/SKILL.md) | `grant-significance-agent-draft` | 5/5 | 5/5 | with skill |
 | [`immune-deconvolution-review`](../skills/immune-deconvolution-review/SKILL.md) | `benchmark-pseudobulk-zh` | 6/6 | 6/6 | with skill |
@@ -23,12 +39,8 @@ had the skill, reading the replies and the files each run produced.
 | [`spatial-neighborhood-statistics`](../skills/spatial-neighborhood-statistics/SKILL.md) | `cd8-tumor-compartments` | 5/5 | 5/5 | with skill |
 | [`tcr-repertoire-metrics`](../skills/tcr-repertoire-metrics/SKILL.md) | `single-cell-pre-post` | 5/5 | 2/5 | with skill |
 | [`tme-bulk-profiling`](../skills/tme-bulk-profiling/SKILL.md) | `melanoma-tpm-phenotypes` | 5/5 | 2/5 | with skill |
-| **All** | 9 cases | **48/48 (100%)** | **39/48 (81%)** | with skill in 9 of 9 |
 
-The last column is the grader's overall judgement of which reply would serve the researcher
-better, taken from its written comparison; it was made without knowing which run had the skill.
-
-## Where the two runs differed
+### Where the two runs differed (iteration 1)
 
 **`immune-signature-curation` / `excel-damaged-gmt-audit`**: passed only with the skill.
 > The result reports that the set name Checkpoints is defined twice with different genes (8 genes and 3 genes), explains that a reader would silently keep only one definition (dictionary-based readers keep the last, 3-gene one), and resolves it explicitly by renaming, merging or dropping one with a s…
@@ -84,22 +96,7 @@ better, taken from its written comparison; it was made without knowing which run
 - With the skill: The reply says "Both scores are relative to these 12 samples only. *MEL11 becomes inflamed if any one of the four inflamed tumours is left out." and "Each gene is standardised across these 12 samples, so every score is relative to this cohort". Under Limits i…
 - Without the skill: Only partly done. B says "the cut-offs are relative to this cohort, they largely decide the answer" and that scores are "z-scored across the 12 tumours". It never states that the labels or z-scores would change if samples were added or removed. There is no le…
 
-## How to read this
-
-- The baseline is strong. A current frontier model working without the skill already passes
-  most statements, so the skills add value mainly at specific decision points: refusing an
-  outcome-selected cut-off as the main figure, not calling a 5-pair comparison significant,
-  not running cell-level tests on one patient, applying the documented tmelens rules. The
-  differences above are those cases.
-- Several statements passed in both configurations. The graders flagged the ones they judged
-  non-discriminating or ambiguous; those notes are kept below and drive the next revision of
-  the eval cases. A statement that every reasonable answer passes measures nothing.
-- The statements were written together with the skills, so they reward what the skills teach.
-  The grader did not know which run had the skill, but the cases were not designed by a party
-  independent of the skills.
-- Per-statement evidence for both runs is in [`evals/iteration-1.json`](evals/iteration-1.json).
-
-## Grader notes on the statements
+### Grader notes on the statements (iteration 1)
 
 - `citation-evidence-check`: Statements 1, 2 and 4 would pass for any answer that actually looked up the references: Crossref and PubMed both flag the retraction, and the abstracts state the 18% (14 of 76) figure and the mouse-only design.
 - `citation-evidence-check`: Statement 2 names a 'cumulative' rate. B gives the same 18% (14 of 76) all-dose figure without that word, so a strict grader and a lenient one could disagree.
@@ -136,6 +133,8 @@ better, taken from its written comparison; it was made without knowing which run
 - `tcr-repertoire-metrics`: Statement 5 bundles two claims: the change is descriptive with no statistical test, and it cannot support a treatment-response conclusion. It is unclear whether a general 'not for clinical judgment' disclaimer satisfies the second part, and whether an attempt that reports p-values with a single-patient caveat deserves partial credit.
 - `tme-bulk-profiling`: Statement 1 (log scale already applied) and statement 4 (MEL03 excluded call is not spatial; use CD8 IHC/mIF) passed for both runs, so they do not separate these two attempts. Both would still catch a naive answer that logs the data again or accepts the MEL03 sentence.
 - `tme-bulk-profiling`: Statement 5 is borderline for Run B. B's "cut-offs are relative to this cohort" implies that the labels depend on the cohort, but it never states the added/removed-samples consequence that the statement requires. A lenient grader might pass it.
+
+Per-statement evidence for both runs: [`evals/iteration-1.json`](evals/iteration-1.json).
 
 ## Reproducing
 

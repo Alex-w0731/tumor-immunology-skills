@@ -64,13 +64,17 @@ Recovery, in order:
 
 1. Find the original: the authors' text or GMT file, the table in the paper, MSigDB, or the
    platform annotation. Prefer it over any repair.
-2. Without the original, use the linter's candidates only: they cover the documented patterns
+2. Without the original, take candidates from the linter only: they cover the documented patterns
    (SEPT1-14 to `#-Sep`, MARCH1-11 to `#-Mar`, DEC1 to `1-Dec`) and list every gene HGNC links
-   to the old symbol (`1-Dec` gives DELEC1 or BHLHE40). Five-digit serials are decoded in
-   the 1900 date system, so `1-Mar` edited in 2019 is 43525 and in 2020 is 43891; a file saved
-   in the 1904 date system decodes to wrong dates. Mark every repaired gene as repaired in the
-   record.
-3. If no candidate fits, drop the field and report the loss; never guess a symbol.
+   to the old symbol (`1-Dec` gives DELEC1 or BHLHE40). Five-digit serials are decoded in the
+   1900 date system, so `2-Sep` typed in 2019 is 43710 and in 2020 is 44076. Read in the 1904
+   date system, the same number is a date four years and one day later (arithmetic), so `2-Sep`
+   becomes `3-Sep`: a serial from a workbook of unknown date system has two candidates.
+3. A candidate is a lookup, not a recovered symbol, even when it fits the set's biology. Keep the
+   field out of any file that will be scored, record the field, its candidates and the source to
+   check, and report it as an open lookup. Write the current symbol only once the source confirms
+   it, and mark that gene as repaired in the record.
+4. If no candidate fits, drop the field and report the loss; never guess a symbol.
 
 Prevention: read spreadsheets programmatically with every column as text (for example
 `readxl::read_excel(path, col_types = "text")` in R), keep gene lists in text formats, and lint

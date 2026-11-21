@@ -2,14 +2,20 @@ schema_version: "1.1"
 name: melanoma-tpm-phenotypes
 expected_outcome: |
   The agent checks the matrix before scoring and finds that the values are already on a log scale
-  (maximum about 13, nothing above 50, non-integer), so it does not log-transform again. It checks
-  signature coverage and reports that only 7 of the 19 Pan_F_TBRS genes are present, below the 50%
-  tmelens needs, so the stromal axis rests on CAF_core alone; the CD8 signature rests on CD8A only.
-  It scores with z-score or mean rather than ssGSEA, because ranks within a cut-down matrix are
-  not genome-wide ranks. It explains that the tmelens rule labels the top third of the
-  infiltration axis inflamed, so "4 of 12 inflamed" is fixed by design and is not a prevalence,
-  and that an "excluded" call from bulk RNA cannot show where T cells sit in MEL03; it proposes
-  CD8 IHC or multiplex immunofluorescence for that claim and states that all labels are relative
-  to these 12 samples.
+  (maximum 12.7, nothing above 50, non-integer), so it does not log-transform them again despite
+  the request. Because the matrix holds only 43 genes, it says that ssGSEA or any other
+  within-sample rank score would rank each set only against the genes present, and it scores with
+  z-scores or mean scores. It checks signature coverage and reports in the reply that only 7 of the
+  19 Pan_F_TBRS genes are present, below the 50% tmelens needs, so Pan_F_TBRS is dropped and the
+  stromal axis rests on CAF_core alone, and that Danaher_CD8_T_cells rests on CD8A alone (CD8B is
+  missing), a single-gene readout. It applies the tmelens rule (inflamed at or above the 2/3
+  quantile of the infiltration axis, about 0.44 on that axis; excluded when not inflamed and the
+  stromal axis is at or above its median over all 12 samples) and explains that 4 of 12 inflamed
+  (MEL01, MEL02, MEL06, MEL09) is fixed by that rule and is not a prevalence. It states that the
+  labels would change if tumours were added or removed (MEL11 becomes inflamed when any one of the
+  four inflamed tumours is left out). It explains that MEL03's excluded call (second-lowest
+  infiltration score, highest stromal score) cannot show where T cells sit, and proposes CD8
+  immunohistochemistry or multiplex immunofluorescence scored separately in tumour nests and
+  stroma to test the spatial claim.
 context:
   scaffold_script: place-files.sh

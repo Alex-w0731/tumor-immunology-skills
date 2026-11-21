@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Chooses, runs and sanity-checks immune deconvolution of bulk tumor transcriptomes, with an NNLS script and a mixture benchmark.
   summary-zh: 选择、运行并核查肿瘤 bulk 转录组的免疫去卷积，附 NNLS 脚本与混合样本基准评估。
@@ -107,13 +107,12 @@ evidence that exists, and a report that says what each number can be compared wi
    - Collinearity: a lower condition number means more stable estimates; Abbas et al. and
      CIBERSORT both chose signature genes partly by minimizing it [Abbas2009] [Newman2015],
      and LM22's value of 11.4 [Newman2015] is a reference point, not a cut-off. The number
-     summarizes the whole matrix, so one inseparable pair can hide behind an ordinary value
-     (a synthetic signature whose M1 and M2 columns NNLS could not separate scored about 6);
-     read the pair flags too (heuristic). For each flagged pair, typically closely related subsets such as M1 and
-     M2 macrophages or naive and memory CD4 T cells, report the sum, or merge the columns and
-     refit. In simulated samples every benchmarked method showed spillover between CD8 and CD4
-     T cells, between NK and CD8 T cells, and from DCs to B cells; the first two were confirmed
-     in validation data [Sturm2019].
+     summarizes the whole matrix, so one inseparable pair can hide behind an ordinary value;
+     read the pair flags too (heuristic). For each flagged pair, typically closely related
+     subsets such as M1 and M2 macrophages or naive and memory CD4 T cells, report the sum, or
+     merge the columns and refit. In simulated samples every benchmarked method showed
+     spillover between CD8 and CD4 T cells, between NK and CD8 T cells, and from DCs to B cells;
+     the first two were confirmed in validation data [Sturm2019].
    - Fit: compare per-sample `pearson_r` and `rel_residual` across samples; a sample that fits
      much worse than the rest has content the reference does not describe. Genes with large
      positive mean residuals are expressed by something absent from the reference.
@@ -146,6 +145,12 @@ evidence that exists, and a report that says what each number can be compared wi
      [Racle2017] [Monaco2019].
    - Score with `mixture_benchmark.py` and read per-cell-type r, RMSE, bias and slope, and the
      per-sample r across cell types. Put both tables on the same denominator first.
+   - Coverage: a benchmark is evidence only for what it spans. Read from the truth the range of
+     the non-reference share (tumor and other cells), each type's lowest true share, and which
+     types are ever absent (only those have a measured background); note the platform of the
+     reference and the mixtures. Name the target samples that fall outside, such as lower
+     immune content, rarer cells, or bulk data scored with a single-cell reference without the
+     correction in step 3: there the benchmark gives no evidence (heuristic).
    - With no validation data, say so and restrict claims to the comparison type the method
      supports (step 1). Design details: `references/validation-design.md`.
 
@@ -258,7 +263,7 @@ Diagnostics: <condition number; collinear pairs and how they were merged; fit r 
   outlier samples; genes with large positive residuals; coef_sum by group; background level>
 Purity: <estimate used; correlation with immune estimates; adjustment or stratification>
 Validation: <none | mixtures (design, held-out cells or patients) | orthogonal (measure, n)>;
-  per cell type r, RMSE, bias
+  per cell type r, RMSE, bias; what it covers (purity range, lowest shares, platform)
 Results: <estimates with spread; group differences with effect size and FDR across cell types>
 Limits: <relative vs absolute; unvalidated or merged cell types; values near background>
 To verify: <orthogonal measurement (IHC, flow cytometry) of the cell types that drive conclusions>

@@ -1,16 +1,19 @@
 schema_version: "1.1"
 name: excel-damaged-gmt-audit
 expected_outcome: |
-  The agent lints the file and finds spreadsheet damage in APC_MHCII: 8-Mar is a date and 43891 is
-  a five-digit date serial (1 March 2020), probably MARCH8 and MARCH1, whose current symbols are
-  MARCHF8 and MARCHF1; it restores them only with a clear note that this must be confirmed in the
-  original source, or removes them pending that source. It reports that Checkpoints is defined
-  twice with different genes (a dictionary-based reader keeps only the last one) and resolves this
-  explicitly. It renames CTGF to CCN2 and FAM101B to RFLNB and records the originals, maps PD-L1 to
-  CD274 and TIM-3 to HAVCR2, and warns that the TPM matrix must carry the same symbol version
-  (an older annotation may still list CTGF, FAM101B or MARCH1), so coverage must be rechecked after
-  renaming. It flags Mouse_CTL as mouse nomenclature in a human file (upper-casing would give CD8B1,
-  a previous symbol of human CD8B, the orthologue of Cd8b1), and treats the one-gene Treg set as a
-  FOXP3 readout. It writes a cleaned GMT with provenance in the description field and a change log.
+  The agent lints the file and keeps the two spreadsheet-damaged APC_MHCII fields out of the cleaned
+  GMT: 8-Mar is a date and 43891 a five-digit date serial (1 March 2020 in the 1900 date system),
+  with MARCHF8 and MARCHF1 (formerly MARCH8 and MARCH1) as candidates that the original source must
+  confirm before either is written into the file. It reports that Checkpoints is defined twice and
+  that a dictionary-based reader keeps the last, 3-gene definition and silently loses the 8-gene
+  one, and resolves this explicitly. It maps CTGF to CCN2, FAM101B to RFLNB, PD-L1 to CD274 and
+  TIM-3 to HAVCR2 with the originals recorded, then reports that the 8-gene Checkpoints set and
+  Exhaustion share five genes (J about 0.42, OC 0.625), so their scores agree partly by
+  construction. It warns that ssGSEA scores depend on the whole collection, so open items must be
+  settled before scoring. It keeps Mouse_CTL out of the human file unless the orthologues come from
+  a named resource (upper-casing Cd8b1 gives CD8B1, a previous symbol of human CD8B), and leaves the
+  one-gene Treg set out of the cleaned GMT, to be shown as FOXP3 expression. It writes a cleaned GMT
+  with provenance in the description field and a change log, and warns that the TPM matrix must use
+  the same symbol version as the cleaned GMT.
 context:
   scaffold_script: place-files.sh

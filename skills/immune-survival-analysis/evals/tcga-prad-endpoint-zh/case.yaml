@@ -1,15 +1,17 @@
 schema_version: "1.1"
 name: tcga-prad-endpoint-zh
 expected_outcome: |
-  The agent advises against OS as the endpoint for TCGA-PRAD: the TCGA Pan-Cancer Clinical Data
-  Resource (Liu et al. 2018) records only about 10 deaths among about 500 patients and does not
-  recommend OS (its Table 3 marks it with a caution), and it recommends the progression-free
-  interval (about 93 events) instead. It replaces the per-cell-type surv_cutpoint cut-offs with
-  prespecified Cox models that treat each cell fraction as a continuous variable (hazard ratio per
-  1 SD), with any Kaplan-Meier split fixed in advance; it applies Benjamini-Hochberg FDR across all
-  22 cell types and every endpoint tested; it relates the number of PFI events to how many
-  covariates an adjusted model can carry (about 10 events per parameter); and it proposes adjusting
-  for tumour purity and for stage or Gleason grade group, explaining that immune estimates from
-  bulk tissue are entangled with purity. It asks for one primary-tumour sample per patient (TCGA sample
-  type 01, normal samples and duplicate aliquots removed) before the analysis. The answer may be
-  written in Chinese.
+  The agent replaces OS with the progression-free interval as the primary endpoint for
+  TCGA-PRAD, citing the TCGA Pan-Cancer Clinical Data Resource (Liu et al. 2018): about 10 OS
+  deaths against about 93 PFI events among about 500 patients. It replaces the per-cell-type
+  surv_cutpoint search with prespecified Cox models that treat each fraction as a continuous
+  variable (HR per 1 SD), and shows the cost of the search with a simulation for a cohort of
+  this size: the best cut-off of a marker with no effect reaches p < 0.05 about 45% of the time
+  (0.44 to 0.46 at 50% to 90% censoring in the bundled simulation). It applies
+  Benjamini-Hochberg once across every cell type, endpoint and model it plans to test (22 for
+  PFI alone, 44 with OS as well). It notes that about 93 PFI events, fewer after exclusions,
+  support about 9 model parameters at 10 events per parameter. It adjusts for stage or Gleason
+  grade group and for tumour purity, preferring a DNA-based purity estimate such as ABSOLUTE to
+  an expression-based one such as ESTIMATE, which is built from immune and stromal genes, and
+  proposes a sensitivity analysis for tissue source site. It keeps one primary-tumour sample per
+  patient. The answer may be written in Chinese.

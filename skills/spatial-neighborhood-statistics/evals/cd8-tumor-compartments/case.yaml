@@ -1,17 +1,19 @@
 schema_version: "1.1"
 name: cd8-tumor-compartments
 expected_outcome: |
-  The agent builds one neighbour graph per patient ROI in micrometres (pixel size 0.5 um, for
-  example a 25 um radius, or kNN with the neighbour distance stated) and finds that CD8T-Tumor
-  contacts are depleted in each of the four ROIs when labels are permuted over the whole ROI
-  (log2 observed/expected roughly -0.7 to -1.1 at 25 um), but not when labels are permuted
-  within the pathologist's Tumor and Stroma regions (log2 near 0, not significant), so the
-  depletion reflects CD8 T cells sitting in stroma rather than local avoidance. A second
-  neighbourhood definition (for example a 40 um radius or kNN with capped edges) gives the same
-  pattern; a radius below the median nearest-neighbour distance (about 17 um) leaves most cells
-  without neighbours and should not be used. It treats each patient as one replicate, reports
-  four per-patient effects, notes that a two-sided sign test over 4 patients cannot go below
-  0.125, and writes the result as compartment-level segregation, not as evidence of an
-  exclusion mechanism, saying what more patients and orthogonal evidence would be needed.
+  The agent builds one neighbour graph per patient ROI in micrometres (0.5 um per pixel), states
+  the median nearest-neighbour distance (about 17 um) and keeps the primary radius or kNN edge cap
+  above it, because at 17 um about half the cells have no neighbour. CD8T-Tumor contacts are
+  depleted in all four ROIs when labels are permuted over the whole ROI (log2 observed/expected
+  about -0.7 to -1.3) but not when labels are permuted within the pathologist's Tumor and Stroma
+  regions. For each patient it gives the observed contacts with the expected count under both
+  nulls (at 25 um, P1: 14 observed, about 26 expected over the whole ROI, about 11 within
+  regions), so compartment composition accounts for about 80% to 130% of the deficit in every
+  patient. The results paragraph keeps inference at the patient level (4 of 4 patients, exact
+  two-sided sign test p = 0.125, the floor for four patients) and cites no p-value pooled across
+  ROIs. The reply says a cohort-level claim needs at least six patients in one direction (6 of 6
+  gives p = 0.031), describes the result as compartment-level segregation rather than avoidance
+  or an exclusion mechanism, and names the data that could test a mechanism (barrier or ECM
+  markers, CD8 functional state, perturbation experiments).
 context:
   scaffold_script: place-files.sh

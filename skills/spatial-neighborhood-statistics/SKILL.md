@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Tests cell-type co-localization and segregation in tissue by label permutation, per slide, with the patient as the replicate.
   summary-zh: 基于标签置换检验细胞类型的空间共定位与分离：逐切片分析，以患者为重复单位。
@@ -119,8 +119,12 @@ reacts to the other.
   classifier on other channels). A "tumour region" drawn around tumour cells removes the
   tumour-immune segregation by construction.
 
-When compartments exist, report the unstratified and the stratified result side by side; the
-difference between them is informative.
+When compartments exist, report the unstratified and the stratified result side by side, per
+sample: observed count, expected count under each null, and where the tested types sit (for
+example the share of CD8 T cells in stroma). (E_unstratified - E_stratified) / (E_unstratified -
+observed) is the share of the unstratified deficit or excess that compartment composition accounts
+for (`heuristic`; near or above 100% means composition explains all of it; read it only when the
+unstratified effect is clear).
 
 Density acts the same way. With a radius graph, dense regions contribute most of the edges, so
 their composition dominates the counts; kNN gives every cell about the same weight. If density
@@ -183,7 +187,9 @@ read a borderline sign-test result for such pairs as approximate.
   numbers of ROIs or cells (this skill's reasoning). An exact two-sided rank-sum test cannot go
   below 2/C(n1 + n2, n1): 0.1 for 3 versus 3 patients, 2/252 = 0.0079 for 5 versus 5
   (`derivation`).
-- Do not pool all cells of all patients into one test, do not combine per-slide p-values with
+- Do not pool all cells of all patients into one test, and that includes a permutation test that
+  sums contacts over samples while permuting within each: its p still describes these cells, not
+  the patients, so keep it out of a results paragraph. Do not combine per-slide p-values with
   Fisher or Stouffer (they test whether random labelling fails anywhere, which structured tissue
   almost guarantees), and do not count "significant in 30% of images" as a test; histoCAT used
   that as a display rule [Schapiro2017].
@@ -294,12 +300,12 @@ The answer to the researcher contains:
 Answer: one or two sentences: which pairs are associated or segregated, in how many patients, under which null
 Question: pairs (pre-specified / exploratory), directional or symmetric; P pairs tested
 Data: N patients, S samples (per patient), cells per type per sample (smallest), um per pixel and its source
-Graph: kNN k = .. (union, edges capped at .. um) or radius .. um; mean degree, isolated cells, longest edge
+Graph: kNN k = .. (union, edges capped at .. um) or radius .. um; median nearest-neighbour distance, mean degree, isolated cells, longest edge
 Null: random labelling within each sample [unstratified | within <compartment>, defined by .. | blocks of .. um]
 Edges: focal cells restricted by .. / sensitivity result
 Per sample: observed, expected, log2(O/E), one-sided p, q (z only within a sample)
-Across patients: per-patient effects, n positive / negative, sign test p (floor ..), q across pairs
-Sensitivity: second graph; stratified versus unstratified; edge buffer
+Across patients: per-patient effects, n positive / negative, sign test p (floor ..), q across pairs; a results paragraph cites these, never a p pooled over samples
+Sensitivity: second graph; stratified versus unstratified (observed, expected under each null); edge buffer
 Not assessable: types below --min-cells, pairs with too few patients for a cohort-level test
 Interpretation: spatial association or segregation in these tissues; not interaction or causation
 Limits and next checks: patients, ROI size, label quality; orthogonal evidence that would test a mechanism

@@ -1,15 +1,19 @@
 schema_version: "1.1"
 name: tumour-blood-overlap
 expected_outcome: |
-  The agent restricts the comparison to TRB (the file also holds ten TRA rows), defines
-  clonotypes the same way in both samples, and notes the depth difference (blood 500 reads,
-  tumour 200). At full depth the samples share 11 of 257 clonotypes: Jaccard about 0.043 and
-  Morisita-Horn about 0.056. With blood subsampled to 200 reads (repeats, seed) Jaccard is
-  about 0.04 and Morisita-Horn about 0.055. About 62.5% of tumour reads fall in clonotypes
-  also detected in blood (about 50% with blood at 200 reads), whereas only about 4.8% of
-  blood reads fall in clonotypes detected in the tumour. The answer explains that
-  Morisita-Horn weights clonotypes by abundance and is dominated by the largest clones, that
-  Jaccard counts presence and absence, and that tumour clonotypes not seen in blood may be
-  present below the blood sampling depth.
+  The agent restricts the comparison to TRB (the file also holds ten TRA rows) and uses one
+  clonotype key for both samples: 65 tumour clonotypes (200 reads) and 203 blood clonotypes
+  (500 reads), 11 shared. At full depth Jaccard is about 0.043 and Morisita-Horn about 0.055;
+  62.5% of tumour reads (125 of 200) fall in clonotypes also detected in blood, although these
+  are only 11 of the 65 tumour clonotypes, and in the other direction 4.8% of blood reads
+  (24 of 500) fall in clonotypes detected in the tumour. With blood subsampled to 200 reads
+  (repeats, seed) Jaccard is about 0.04 and Morisita-Horn about 0.055, while the tumour-side
+  share falls to about 50% (exact expectation 49.8%; roughly 28% to 62% across repeats, which
+  the reply describes as subsampling variation, not a confidence interval). The reply explains
+  that Morisita-Horn is low because the blood's two largest clonotypes (120 and 60 reads, 36%
+  of blood reads) are not detected in the tumour, whereas the tumour's three largest
+  clonotypes (50, 30 and 20 reads) are all detected in blood. The 54 tumour clonotypes without
+  a blood match (47 of them single reads) are described as not detected in blood at this
+  depth, not as absent or tumour-specific. All of these values are stated in the reply itself.
 context:
   scaffold_script: place-files.sh

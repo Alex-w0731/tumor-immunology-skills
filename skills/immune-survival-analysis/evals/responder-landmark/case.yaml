@@ -2,17 +2,22 @@ schema_version: "1.1"
 name: responder-landmark
 expected_outcome: |
   The agent recognises immortal-time (guarantee-time) bias in the responder comparison:
-  responses were documented 3 to 12 months after treatment start, so responders had to survive
-  that long. The naive comparison from treatment start is strongly significant (log-rank p about
-  0.0006; Cox HR about 0.51), but a landmark analysis at a time fixed in advance, for example 6
-  months (101 patients still under follow-up, 35 of them responders by then, classified by status
-  at the landmark; 13 of the 55 responses come after it and count as non-responders), gives an HR of about 1.0 (log-rank p about 0.96); a 3-month landmark gives p
-  about 0.5, and a Cox model with response as a time-dependent covariate is also acceptable. The
-  agent analyses the baseline CD8 score as a continuous variable from treatment start (HR per 1
-  SD about 0.71, 95% CI 0.59 to 0.85, or the continuous score test with p about 0.0003, higher
-  score with lower hazard) and notes that this pre-treatment measurement is not affected by the
-  bias. It rewrites the draft so that it neither claims that response prolongs survival nor that
-  a single-arm comparison confirms treatment benefit. The data are synthetic, with no true
-  effect of response on survival.
+  responses were documented 3 to 12 months after the first infusion, so responders had to
+  survive that long. The naive comparison from treatment start is strongly significant (log-rank
+  p about 0.0006; Cox HR about 0.51), but an analysis that removes immortal time shows no
+  difference. With a landmark fixed in advance at 6 months, 101 patients remain (103 if the two
+  deaths at exactly 6.0 months are kept), 35 of them responders by then; 13 of the 55 responses
+  come later and are analysed as non-responders; HR about 1.0, log-rank p about 0.96. A 3-month
+  landmark (about 127 patients, 26 responders, 29 later responses) gives p about 0.5, and a Cox
+  model with response as a time-dependent covariate gives HR about 1.06 (0.68 to 1.65). The
+  Kaplan-Meier figure offered for the paper is the landmark plot; a plot from treatment start,
+  if drawn, is labelled as biased. The revised wording reports the corrected result rather than
+  the naive p < 0.001, and claims neither that response prolongs survival nor that a single-arm
+  comparison confirms treatment benefit. The baseline CD8 score is analysed as a continuous
+  variable from treatment start, which this bias does not affect: HR per 1 SD about 0.71 (95% CI
+  0.59 to 0.85) with the SD stated (about 0.86 units), or about 0.67 per unit; the continuous
+  score test gives p about 0.0003, higher score with lower hazard. No CD8 model is adjusted for
+  response, which is measured after baseline. The data are synthetic, with no true effect of
+  response on survival.
 context:
   scaffold_script: place-files.sh

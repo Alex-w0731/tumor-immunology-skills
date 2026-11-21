@@ -1,13 +1,13 @@
 schema_version: "1.1"
 name: treg-pseudobulk-subtype-zh
 expected_outcome: |
-  The agent sums raw UMI counts per sample (keeping percent_mt, tissue and data_status out of the gene
-  matrix), applies a minimum-cell filter that, at the usual 10 cells, removes T3 (6 cells) and H2
-  (4 cells), and notices that H4 and H4m are the primary tumour and metastasis of patient P8, so HR+
-  has 4 patients rather than 5 replicates and 3 after filtering; it keeps one sample per patient by a
-  stated rule (for example the primary tumour, like all other samples) or models the patient. It
-  concludes that 3 versus 3 patients supports at most an exploratory pseudobulk analysis (edgeR,
-  DESeq2 or limma-voom with patients as replicates), does not use cell-level tests as inference, and
-  suggests cautious wording plus validation in more patients.
+  The agent sums raw UMI counts per sample into Treg pseudobulks and recognises H4 (primary) and
+  H4m (metastasis) as two specimens of patient P8: it keeps one by a stated rule, such as primary
+  tumours only, or models the patient, and neither keeps both as replicates nor sums them. With a
+  10-cell minimum it excludes T3 (6 cells) and H2 (4 cells), so 3 TNBC and 3 HR+ patients remain,
+  and it reports that a 30-cell sensitivity rerun would leave no sample because the largest
+  pseudobulk has 15 cells. Any pseudobulk DE (edgeR, DESeq2 or limma-voom with patients as
+  replicates) is exploratory; the agent warns that a non-significant gene cannot be called
+  unchanged at this size, and its draft wording gives the sample size as 3 versus 3 patients.
 context:
   scaffold_script: place-files.sh

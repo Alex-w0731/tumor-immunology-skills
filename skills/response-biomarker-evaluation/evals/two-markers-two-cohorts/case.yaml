@@ -1,16 +1,18 @@
 schema_version: "1.1"
 name: two-markers-two-cohorts
 expected_outcome: |
-  The agent analyses each cohort before pooling. Per cohort, tis_score has an AUC of
-  about 0.72 (cohort A) and 0.69 (cohort B), with a within-cohort AUC of about 0.71, while the
-  pooled AUC is higher (about 0.76) because tis_score is shifted upward in cohort A, which also
-  has more responders. The markers are compared with a paired method on the same patients
-  (DeLong or paired bootstrap): pooled, tis_score looks better (difference about 0.16, p about
-  0.03), but within each cohort the difference is small and its interval includes 0 (about 0.07
-  in A and 0.10 in B; a within-cohort combined difference of about 0.08, 95% CI roughly -0.05 to
-  0.20). The agent concludes that the data do not support claiming tis_score is superior to
-  PD-L1 mRNA, notes that cohort B has only 6 responders, and answers in Chinese. Interval
-  endpoints depend on the method and seed, so the numbers are approximate. The data file is
-  synthetic.
+  The agent analyses each cohort before pooling. Per cohort, tis_score has an AUC of about 0.72 in
+  cohort A (16 responders, 24 non-responders) and 0.69 in cohort B (6 responders, 30
+  non-responders); cohort B's 95% interval (about 0.44 to 0.91) includes 0.5, so cohort B on its
+  own is exploratory. The within-cohort AUC is about 0.71, while the pooled AUC is higher (about
+  0.76) because cohort A has both higher tis_score values and a higher response rate (16/40
+  versus 6/36). The markers are compared with a paired method on the
+  same patients (DeLong or paired bootstrap): pooled, tis_score looks better (difference about
+  0.16, p about 0.03), but within each cohort the difference is small and its interval includes 0
+  (about 0.07 in A and 0.10 in B), and the within-cohort combined difference is about 0.08 (95% CI
+  roughly -0.05 to 0.20). The agent concludes that the data do not support claiming tis_score is
+  superior to PD-L1 mRNA, does not use the pooled test as support for that or a softer claim, and
+  answers in Chinese. Interval endpoints depend on the method and seed, so the numbers are
+  approximate. The data file is synthetic.
 context:
   scaffold_script: place-files.sh

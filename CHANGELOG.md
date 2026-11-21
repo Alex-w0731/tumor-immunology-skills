@@ -4,6 +4,29 @@ All notable changes to this collection are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the collection uses
 [semantic versioning](https://semver.org/).
 
+## [0.1.1] - 2026-11-20
+
+Second iteration, driven by the first blind evaluation.
+
+### Changed
+
+- Eval graders in all 27 cases were audited. Statements the blind grader judged
+  non-discriminating (passed for reasons unrelated to the skill) or ambiguous were rewritten or
+  removed; statements now say whether a value must appear in the reply or may sit in an output
+  file, and every number in a grader was recomputed with the bundled scripts.
+- Each skill gained the rules where the evaluation showed a gap, for example: offer the paper
+  figure from the valid analysis whatever grouping was requested (`immune-survival-analysis`);
+  do not switch tests because an exact floor is above 0.05 (`single-cell-patient-level-stats`);
+  a spreadsheet-damage candidate is a lookup, not a repair (`immune-signature-curation`);
+  saying a paper does not report something needs its full text (`citation-evidence-check`);
+  report observed and expected counts under each null per sample (`spatial-neighborhood-statistics`);
+  a benchmark is evidence only for the range it spans (`immune-deconvolution-review`); keep a
+  per-patient inclusion table (`response-biomarker-evaluation`); rerun with the other clonotype key
+  when the key is a judgement call (`tcr-repertoire-metrics`); score CD8 in tumor and stroma
+  separately when testing an exclusion statement (`tme-bulk-profiling`).
+- Every skill's `metadata.version` is now 0.1.1. The iteration-1 results in `docs/evals.md` were
+  obtained with the 0.1.0 graders and are kept as they were.
+
 ## [0.1.0] - 2026-11-20
 
 First public release.

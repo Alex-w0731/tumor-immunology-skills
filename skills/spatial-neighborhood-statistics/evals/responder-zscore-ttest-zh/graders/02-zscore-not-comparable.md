@@ -4,4 +4,4 @@ focus: trace
 weight: 1
 ---
 
-The response explains that squidpy z-scores are not comparable across ROIs because they scale with the number of cells (or edges) in each ROI, and recommends a comparable effect size such as log2 observed/expected contacts or a model weighted for cell numbers.
+The reply says the squidpy z-scores cannot be compared or averaged across ROIs because z grows with the number of cells and edges in an ROI (for the same spatial pattern, a larger ROI gives a larger |z|), and names log2 observed/expected neighbour contacts, or a model weighted for cell numbers, as the per-ROI measure to use instead.

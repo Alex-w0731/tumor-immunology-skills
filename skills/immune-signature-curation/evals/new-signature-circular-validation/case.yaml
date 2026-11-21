@@ -1,13 +1,15 @@
 schema_version: "1.1"
 name: new-signature-circular-validation
 expected_outcome: |
-  The agent declines to present R120 as validated. It explains that the AUC of 0.94 is optimistic
-  because the genes were selected with the response labels of all 38 patients before the
-  cross-validation, so selection must be repeated inside each fold or the frozen signature tested in
-  an independent anti-PD-1 cohort. It states that the TCGA-SKCM survival association is a different
-  endpoint in a cohort not selected for anti-PD-1 treatment and that, as large random gene sets often
-  associate with outcome, R120 must be compared with random sets of 120 genes and adjusted for
-  proliferation and purity. It asks for comparison with established signatures (for example the
-  IFN-gamma or T cell-inflamed gene lists) for incremental value. It records R120 in the library
-  with a derived label naming the cohort and selection method, and drafts methods text that
-  describes it as exploratory.
+  The agent declines to present R120 as validated. The AUC of 0.94 is optimistic because the 120
+  genes were selected with the response labels of all 38 patients; an unbiased internal estimate
+  repeats the DESeq2 selection inside every fold of 10-fold cross-validation or the .632+
+  bootstrap, and validation proper needs an independent anti-PD-1 cohort with the signature
+  frozen. The TCGA-SKCM survival association is a different endpoint in patients not selected for
+  anti-PD-1 and needs its own checks: a benchmark against random 120-gene sets scored and tested
+  the same way (GSVA, median split, log-rank), reported as a percentile, and results both
+  unadjusted and adjusted for proliferation and purity. The agent asks for R120's coherence to be
+  checked in data not used to select it and for its incremental value over established signatures
+  (for example the IFN-gamma or T cell-inflamed lists) in the same patients and model. It records
+  R120 in the library as derived, naming the discovery cohort and the selection method, and drafts
+  methods text that describes it as exploratory.

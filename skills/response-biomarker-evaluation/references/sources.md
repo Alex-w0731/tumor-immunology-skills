@@ -13,7 +13,7 @@ says so. The indented line says what this skill takes from the source.
 - **[Benjamini1995]** Benjamini Y, Hochberg Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J R Stat Soc Series B Stat Methodol. 1995;57(1):289-300. doi:10.1111/j.2517-6161.1995.tb02031.x.
   FDR control across many screened markers (tmelens applies it across signatures).
 - **[Bossuyt2015]** Bossuyt PM, Reitsma JB, Bruns DE, et al. STARD 2015: an updated list of essential items for reporting diagnostic accuracy studies. BMJ. 2015;351:h5527. doi:10.1136/bmj.h5527. PMID: 26511519.
-  Reporting checklist when a marker or threshold is evaluated as a classifier of response.
+  Reporting checklist when a marker or threshold is evaluated as a classifier of response; item 19 asks for the flow of participants, using a diagram (full text).
 - **[Clopper1934]** Clopper CJ, Pearson ES. The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika. 1934;26(4):404-413. doi:10.1093/biomet/26.4.404.
   Exact binomial interval used for sensitivity, specificity, PPV and NPV.
 - **[Collins2015]** Collins GS, Reitsma JB, Altman DG, Moons KGM. Transparent reporting of a multivariable prediction model for individual prognosis or diagnosis (TRIPOD): the TRIPOD statement. BMJ. 2015;350:g7594. doi:10.1136/bmj.g7594. PMID: 25569120.

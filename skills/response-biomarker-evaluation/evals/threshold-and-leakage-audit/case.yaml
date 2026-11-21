@@ -1,14 +1,19 @@
 schema_version: "1.1"
 name: threshold-and-leakage-audit
 expected_outcome: |
-  The agent reproduces the 2x2 table at the 0.31 cut-off (TP 18, FN 2, FP 3, TN 17)
-  and reports sensitivity 18/20, specificity 17/20, PPV 18/21 and NPV 17/19 with exact
-  (Clopper-Pearson) intervals, for example sensitivity 0.90 (0.68 to 0.99). It explains that the
-  genes and the cut-off were both chosen on these 40 patients, so the AUC of 0.93 and the
-  accuracy figures are apparent and optimistic, and asks for an independent cohort or nested
-  cross-validation that repeats gene selection and cut-off choice inside each training fold. It
-  notes that PPV and NPV reflect this cohort's 50% response rate (PPV about 0.60 at a 20%
-  response rate). The drafted paragraph labels the results as discovery-cohort estimates and does
-  not claim accurate prediction of response. The data file is synthetic.
+  The agent tells the researcher that the input file is marked as synthetic, so its numbers cannot
+  go into the manuscript. It reproduces the 2x2 table at the 0.31 cut-off (TP 18, FN 2, FP 3,
+  TN 17) and gives in the reply sensitivity 18/20, specificity 17/20, PPV 18/21 and NPV 17/19 with
+  exact Clopper-Pearson 95% intervals (0.68 to 0.99, 0.62 to 0.97, 0.64 to 0.97 and 0.67 to 0.99).
+  It explains that the 12 genes and the cut-off were both chosen on these 40 patients, so the AUC
+  of 0.93 and the accuracy figures are apparent and optimistic, and that a valid internal estimate
+  needs cross-validation that redoes both the gene selection and the cut-off choice inside every
+  training fold, with an independent cohort as the stronger test. It recomputes PPV and NPV at a
+  response rate below the cohort's 50%, for example PPV 0.60 and NPV 0.97 at 20%. It notes that a
+  single-arm cohort can show an association with response, not that the signature predicts
+  benefit from anti-PD-1, which would need a comparator arm. The drafted results paragraph makes
+  the threshold-free AUC (0.93, 20 responders and 20 non-responders) its primary result, labelled
+  as apparent performance, presents any cut-off metrics as in-sample, and does not claim that the
+  signature accurately predicts response.
 context:
   scaffold_script: place-files.sh

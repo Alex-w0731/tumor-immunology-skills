@@ -1,9 +1,10 @@
 schema_version: "1.1"
 name: pseudoreplicated-writeup-request
 expected_outcome: |
-  The agent explains that both analyses treat cells as independent replicates (pseudoreplication), so
-  their p-values say nothing reliable about responders versus non-responders with 3 versus 3 patients.
-  It recommends pseudobulk differential expression with the patients as replicates and per-patient
-  CD8 proportions compared with an exact rank test, noting that 3 versus 3 patients cannot give a
-  two-sided exact p below 0.1. Instead of a results paragraph built on the original p-values it offers
-  exploratory wording and names validation in more patients or an orthogonal assay.
+  The agent explains that FindMarkers across cells and the Fisher test on pooled cell counts treat
+  cells as independent replicates, so its drafted paragraph reports none of those statistics as
+  results; it recommends pseudobulk DE with the 3 responders and 3 non-responders as replicates
+  and per-patient CD8 proportions. It asks for the smallest attainable p for 3 versus 3 (0.1 for an
+  exact two-sided rank-sum test) to be reported beside the observed p, does not offer another test
+  as a route to p < 0.05, summarises the proportion comparison by a direction count across the six
+  patients, and labels the drafted paragraph exploratory.

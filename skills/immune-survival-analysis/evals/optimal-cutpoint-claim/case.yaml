@@ -1,16 +1,19 @@
 schema_version: "1.1"
 name: optimal-cutpoint-claim
 expected_outcome: |
-  The agent does not endorse the searched cut-off. It explains that taking the cut-off with the
-  smallest p-value inflates the false-positive rate and quantifies this for these data: a
-  permutation p-value adjusted for the search is about 0.13 (it varies slightly with the seed and
-  the number of permutations), or a simulated false-positive rate for a cohort of this size is
-  far above 0.05 (about 0.48 with 120 patients and 39% censoring in the bundled simulation). It reports the prespecified analyses instead: the Cox hazard ratio per 1 SD of
-  cd8_score, about 0.86 (95% CI 0.68 to 1.08, p about 0.18) unadjusted and about 0.85 (0.68 to
-  1.07) adjusted for stage and age, or the continuous score test (p about 0.19) if no Cox
-  software is available; and a Kaplan-Meier comparison at the median (60 versus 60 patients,
-  log-rank p about 0.17). It does not call CD8 an independent prognostic factor, and it suggests
-  testing a prespecified hypothesis in an independent cohort. The data are synthetic and have
-  no true CD8 effect.
+  The agent does not endorse the searched cut-off or the claim of independent prognostic value.
+  The Kaplan-Meier figure it offers for the paper uses a split fixed without reference to
+  outcome, such as the median (60 versus 60 patients, log-rank p about 0.17); a figure of the
+  0.607 split, if made at all, is labelled exploratory. It shows why the search misleads by
+  contrasting computed false-positive rates for a cohort like this one (about 120 patients, 39%
+  censored): about 0.48 for the best cut-off against about 0.05 to 0.06 for a median split or
+  the continuous test (bundled simulation, n 120, censoring 0.392, seed 1); the search-adjusted
+  permutation p for the 0.607 cut is about 0.13. Its primary analysis is the continuous Cox
+  model: HR per 1 SD about 0.86 (95% CI 0.68 to 1.08, p about 0.18), with the SD of cd8_score
+  (about 1.03 units) stated, and about 0.85 (0.68 to 1.07) adjusted for stage and age. It checks
+  the adjusted model: about 24 events per parameter (73 deaths, 3 parameters) and a stage III-IV
+  hazard ratio of about 1.38 (0.87 to 2.19), above 1 as expected, as a positive control for
+  event coding. It suggests testing a prespecified hypothesis in an independent cohort. The data
+  are synthetic and have no true CD8 effect.
 context:
   scaffold_script: place-files.sh

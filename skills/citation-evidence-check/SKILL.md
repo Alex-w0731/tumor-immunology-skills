@@ -14,7 +14,7 @@ license: MIT
 compatibility: Requires network access to api.crossref.org, doi.org, eutils.ncbi.nlm.nih.gov and www.ebi.ac.uk
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Checks that references exist, match their metadata, are not retracted, and actually support the claims they are cited for.
   summary-zh: 核对参考文献是否真实、信息无误、未撤稿，并确认原文确实支持所引用的论述。
@@ -103,7 +103,9 @@ plausible references that do not exist [Walters2023].
      citation and the statement needs the primary source.
    Read the results, not only the concluding sentence: reports can present findings more
    favourably than the data allow ("spin") [Boutron2018]. Classify each pair with the support
-   table below.
+   table below. Saying that a paper does not report something (a rate, a subgroup, a result)
+   needs the full text; from the abstract alone write "not in the abstract", because an abstract
+   carries only part of the results.
 
 6. **Check the evidence type** from `flags` and the paper itself.
    - Review: acceptable for a concept or an overview. For a specific finding, trace it to the
@@ -130,10 +132,15 @@ plausible references that do not exist [Walters2023].
    "in mouse models, ..." or a human source.
 
 8. **Decide what happens to anything unverified**, and say which option you chose: narrow the
-   statement to what a verified source shows; replace the source with one you looked up and
-   read, marked as new; mark it for the author (`[unverified: reason]`); or delete it. Never keep
-   an unverified statement silently and never cite from memory. When only the abstract was
-   accessible, say so for that statement.
+   statement to what a verified source shows; mark it for the author (`[unverified: reason]`);
+   delete it; or propose a replacement source you looked up and read. Never keep an unverified
+   statement silently and never cite from memory. When only the abstract was accessible, say so
+   for that statement.
+   - Keep the corrected text to the author's own statements, fixed, narrowed, marked or removed.
+     List replacement sources and any new sentence beside it, marked new, with the identifier and
+     what you checked it against (abstract or full text), unless the user asked you to insert
+     replacements. A new paper inside a corrected paragraph reads as the author's checked claim,
+     and co-authors cannot tell it from the original.
 
 9. **Report** with the template below. Show proposed changes against the original wording; in
    someone else's text the author decides.
@@ -254,6 +261,9 @@ Should change: [n] overstated (species, population, causal wording); [n] metadat
 
 ### Proposed changes
 - [n] original -> proposed. Reason.
+
+### Optional new sources (not in the corrected text)
+- [n] new: Author Year, DOI or PMID; checked against abstract or full text; what it supports.
 
 ### Unresolved, for the author
 - Statements that could not be verified, what was searched, and why it failed.

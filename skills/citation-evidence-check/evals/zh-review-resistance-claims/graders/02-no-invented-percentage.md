@@ -4,4 +4,4 @@ focus: trace
 weight: 1
 ---
 
-The result does not supply a replacement percentage for B2M-related resistance from memory; any alternative source it suggests is either shown to have been looked up and checked or explicitly labelled as unverified.
+Every figure in the reply or an output file for how often B2M loss underlies resistance to PD-1 blockade, other than the Zaretsky et al. counts, is attributed to a paper whose DOI or PMID the trace shows was looked up in this session and whose retrieved abstract or full text contains that figure; a figure without such a source fails, even when hedged ("about", "reported") or labelled unverified.

@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Checks a bulk tumor expression matrix, scores immune signatures and reports immune phenotypes with their limits.
   summary-zh: 检查肿瘤 bulk 表达矩阵，计算免疫特征评分，并在说明局限的前提下给出免疫表型。
@@ -161,7 +161,9 @@ at or above its median over all samples; desert = the rest. What follows from it
 - The phenotypes are spatial: in excluded tumors CD8 T cells sit in the peritumoral stroma rather
   than the parenchyma [Mariathasan2018], within the immune-profile framework of [Chen2017]. Bulk RNA
   cannot locate cells, so a bulk "excluded" call means low T-cell signal with an active stromal /
-  TGF-beta program. Test spatial statements with CD8 IHC or multiplex immunofluorescence.
+  TGF-beta program. Test spatial statements with CD8 IHC or multiplex immunofluorescence scored
+  separately in tumor parenchyma and stroma, with a tumor-cell co-stain marking the boundary
+  (convention); a whole-section CD8 count cannot separate excluded from inflamed tumors.
 - Labels are cohort-relative: they change when samples are added or removed and do not transfer
   between cohorts.
 - Use the continuous axes, not the labels, for association tests, and never tune the quantiles to
@@ -255,8 +257,8 @@ Results   scores or associations with effect sizes and FDR; raw and purity-adjus
           side; phenotype counts described as threshold-defined
 Limits    no spatial information; cohort-relative labels; purity source and circularity;
           platform or batch confounding; research use only
-Next      orthogonal checks: CD8 IHC or multiplex IF, expression-independent purity,
-          replication in an independent cohort
+Next      orthogonal checks: CD8 IHC or multiplex IF scored in tumor and stroma separately,
+          expression-independent purity, replication in an independent cohort
 ```
 
 Write in the user's language; keep gene symbols, signature names and statistics untranslated.

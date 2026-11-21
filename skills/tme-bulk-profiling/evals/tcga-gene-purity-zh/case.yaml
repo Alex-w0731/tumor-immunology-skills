@@ -4,8 +4,12 @@ expected_outcome: |
   The agent explains, in Chinese, that the matrix must be transposed to genes x samples and the
   versioned Ensembl IDs mapped to HGNC symbols before any symbol-based signature can be scored. It
   explains that a gene expressed mainly by tumour cells correlates negatively with immune scores
-  through purity alone, recommends purity-adjusted partial correlations reported next to the raw
-  ones with FDR control across signatures, and warns that ESTIMATE purity is itself built from
-  immune and stromal gene expression, so adjusting immune scores for it partly removes the signal
-  under study; it suggests ABSOLUTE or pathology purity, or a sensitivity analysis. It rejects the
-  causal sentence and offers associational wording plus ways to test causality.
+  through purity alone, and it recommends reporting, for every signature, the raw Spearman
+  correlation next to the purity-adjusted partial Spearman correlation, with Benjamini-Hochberg FDR
+  across the signatures tested. It warns that ESTIMATE purity is itself built from immune and
+  stromal gene expression, so adjusting immune scores for it partly removes the signal under
+  study; it names ABSOLUTE (copy-number based) or pathology purity as the covariate for the main
+  analysis, does not offer CPE as an independent alternative because ESTIMATE is one of its
+  inputs, and keeps any ESTIMATE-adjusted result as a labelled sensitivity analysis. It rejects the
+  proposed sentence as both causal and spatial, since bulk RNA cannot show where T cells sit, and
+  offers associational wording plus ways to test the claim.

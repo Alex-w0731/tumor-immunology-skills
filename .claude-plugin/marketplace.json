@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Agent skills for tumor immunology and immuno-oncology research.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "plugins": [
     {
@@ -14,7 +14,13 @@
       "source": "./",
       "description": "Evidence-linked agent skills for tumor immunology research: decision rules with sources, tested standard-library scripts, and evals for omics analysis, bench work and rigor checks.",
       "category": "research",
-      "keywords": ["tumor-immunology", "immuno-oncology", "tumor-microenvironment", "single-cell", "bioinformatics"],
+      "keywords": [
+        "tumor-immunology",
+        "immuno-oncology",
+        "tumor-microenvironment",
+        "single-cell",
+        "bioinformatics"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/Alex-w0731/tumor-immunology-skills"
     }

@@ -1,15 +1,19 @@
 schema_version: "1.1"
 name: signature-redundancy-survival-zh
 expected_outcome: |
-  The agent computes pairwise gene overlap (Jaccard index and overlap coefficient): both CYT genes lie
-  inside Danaher_Cytotoxic_cells (J = 0.2, OC = 1); Immune_Checkpoints and T_cell_Exhaustion share
-  five genes (J about 0.42, OC 0.625); TIS_Ayers18 also overlaps Immune_Checkpoints (5 genes) and
-  IFNG_Ayers6 (3 genes). It explains that the high correlations are partly built in by shared genes
-  and common immune infiltration, so the four scores are not four independent findings; it
-  proposes one joint model, reporting them as one immune-infiltration finding, or a sensitivity
-  analysis with shared genes removed, plus multiple-testing control. Before calling the survival
-  association specific it asks for a benchmark against random gene sets of the same size and for
-  checks or adjustment for tumour purity and proliferation (Proliferation_core is in the file).
-  The answer may be written in Chinese.
+  The agent runs the overlap check on all seven sets. Within the four named signatures both CYT
+  genes lie inside Danaher_Cytotoxic_cells (J = 0.2, OC = 1) and Immune_Checkpoints and
+  T_cell_Exhaustion share five genes (J about 0.42, OC 0.625), but the two cytotoxic sets share no
+  genes with the two checkpoint sets, so the correlations above 0.8 between them come from common
+  immune infiltration: zero gene overlap does not make scores independent, and the four scores are
+  one immune-infiltration finding, to be tested in one model or reported as one finding. The
+  redundancy extends to TIS_Ayers18, which shares five genes with Immune_Checkpoints and three with
+  IFNG_Ayers6. Before calling the survival association specific, the agent asks for a benchmark
+  against random gene sets matched to each signature's size (2, 10, 8 and 9 genes), scored the same
+  way and fitted in the same age- and stage-adjusted Cox model, reported as a percentile; for purity
+  adjustment with an estimate not computed from immune or stromal gene expression (copy number or
+  pathology rather than ESTIMATE); for hazard ratios with and without adjustment for the
+  Proliferation_core score; and for multiple-testing correction across every set tested, including
+  any of the seven not reported. The answer may be written in Chinese.
 context:
   scaffold_script: place-files.sh

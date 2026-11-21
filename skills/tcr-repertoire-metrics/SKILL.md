@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Computes TCR repertoire diversity, clonality and overlap from clonotype counts, compared at equal sequencing depth.
   summary-zh: 基于克隆型计数表计算TCR库多样性、克隆性与样本间重叠，并在相同测序深度下比较。
@@ -57,7 +57,9 @@ spread from repeated subsampling and an honest statement of what the numbers can
    and overlap. Analyse one locus per run: TRB for most bulk data; for single-cell data either
    TRB or the paired alpha-beta clone ID the pipeline assigned. Pooling TRA and TRB counts each
    cell twice and merges two distributions; the script refuses a multi-chain table unless
-   `--chain` picks one.
+   `--chain` picks one. When the key is a judgement call (TRB alone versus the paired clone
+   ID, amino acid versus nucleotide), rerun the primary comparison with the other key and
+   report whether the conclusion changes (heuristic).
 
 3. **Filter and read the QC block.** Keep productive rearrangements, the population on which
    clonality was defined [Tumeh2014] (the script does this whenever a `productive` column
@@ -124,8 +126,11 @@ spread from repeated subsampling and an honest statement of what the numbers can
    cell, read, clonotype or subsampling repeat, is the unit of replication. Pair pre and post
    or tumour and blood samples from the same patient. Several metrics summarise the same
    distribution and move together, so name one primary metric before testing and adjust the
-   rest for multiplicity. With one sample per group, describe and do not test. This is
-   research analysis, not a decision rule for an individual patient.
+   rest for multiplicity. With one sample per group, describe and do not test, and say what
+   the description cannot show: a change between two biopsies of one patient mixes any
+   treatment effect with differences between the biopsies (site, tumour content, sampling),
+   so it is not evidence of response. This is research analysis, not a decision rule for an
+   individual patient.
 
 8. **Report** with the template below.
 
@@ -263,14 +268,17 @@ means undefined (for example clonality with a single clonotype, or Chao1 from fr
 
 ## Report
 
-The answer to the researcher contains:
+The answer to the researcher contains the following, stated in the reply itself (a number
+left only in an output file has not been reported):
 
 1. **Data and definitions**: chain, clonotype key, count unit, filters with rows dropped, and
    each sample's depth (and cell number for single-cell data).
 2. **Depth handling**: common depth and how it was chosen, repeats, seed, excluded samples,
    and whether the ranking held at a second depth.
 3. **Results table** at the common depth (mean and spread over repeats), with full-depth
-   values only as context; say that the spread is subsampling noise only.
+   values only as context; say that the spread is subsampling noise only. For overlap, give
+   Morisita-Horn, Jaccard and the shared fraction in each direction, and name each sample's
+   largest clonotypes and whether the other sample has them.
 4. **Interpretation**: which metric answers the question, and why metrics disagree if they do.
 5. **Statistics**: the unit of replication and the test, or why no test was run.
 6. **Limits and checks**: depth and coverage, possible artefactual clonotypes, Chao1 as a lower

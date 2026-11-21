@@ -1,13 +1,14 @@
 schema_version: "1.1"
 name: cibersort-relative-review
 expected_outcome: |
-  The agent does not simply draft the paragraph. It flags that CIBERSORT was run on log2-transformed values although
-  it needs non-log linear input, and asks for a re-run on TPM. It explains that relative-mode fractions are shares of
-  total immune content (the LM22 cell types), so a lower CD8 share in SPP1-high tumours does not show fewer CD8 T cells,
-  and proposes an absolute-scale estimate (CIBERSORT absolute mode, EPIC or quanTIseq) or an immune-content check. It
-  states that MCP-counter scores are comparable between samples but not between cell populations, so they cannot show
-  which immune cell type dominates. It advises against uploading LM22 to a public repository, because the CIBERSORTx
-  terms are non-commercial, grant use of the service only and reserve all other rights, and suggests pointing readers
-  to the source. It raises tumour purity as a confounder of the SPP1 comparison and FDR control across the 22 cell
-  types. Any drafted text describes the CIBERSORT results as shares of immune cells, not as more or fewer cells, and is
-  marked provisional until the re-run.
+  The agent does not simply draft the paragraph. It says the CIBERSORT numbers cannot be reported as they stand,
+  because CIBERSORT was run on log2(TPM+1) values, and asks for a re-run on linear TPM (2^x - 1). For the CD8 claim it
+  explains that relative-mode fractions are shares of the LM22 immune cells, so a lower CD8 share does not show fewer
+  CD8 T cells, and names an output comparable between samples (CIBERSORT absolute mode, EPIC, quanTIseq, or the
+  MCP-counter CD8 T cell score). For the dominance claim it explains that MCP-counter scores cannot be compared
+  between populations and points to deconvolution fractions instead (CIBERSORT after the re-run with the macrophage
+  states summed, EPIC or quanTIseq). It advises against committing LM22 to the public repository, because the
+  CIBERSORTx terms allow non-commercial use of the service only and reserve all other rights, and suggests pointing
+  reviewers to the source. It recommends checking whether the SPP1 groups differ in tumour purity with an independent
+  estimate and adjusting or stratifying if they do, and FDR control across the 22 cell types. It drafts provisional
+  text that words the CIBERSORT results as shares of immune cells, never as more or fewer cells or a dominant type.

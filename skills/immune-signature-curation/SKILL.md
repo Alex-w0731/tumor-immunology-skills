@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Builds, imports and audits immune gene signatures and GMT files for provenance, symbol hygiene, redundancy and confounding.
   summary-zh: 构建、导入并审核免疫基因签名与GMT文件，核查来源、基因符号、冗余与混杂。
@@ -76,11 +76,12 @@ performance over to that score.
   does not undo the damage.
 - Run `scripts/gmt_lint.py` on every incoming file. Resolve every `error`, decide every
   `warning`, and record each decision for the report.
-- A date (`1-Mar`, `2006/09/02`), a float (`2.31E+13`) or a five-digit serial (`43891`) in a gene
+- A date (`1-Mar`, `2006/09/02`), a float (`2.31E+13`) or a five-digit serial (`43710`) in a gene
   field means the symbol was lost. The linter decodes serials and names the documented candidates
-  (SEPT1-14, MARCH1-11, DEC1). Confirm each against the source and write the current symbol
-  (`SEPTIN2`, `MARCHF1`), not the retired one [Bruford2020]; drop the gene and say so when the
-  source cannot be found. `1-Dec` needs the source most: DEC1 may be DELEC1 or BHLHE40 (step 3).
+  (SEPT1-14, MARCH1-11, DEC1; `1-Dec` has two, DELEC1 and BHLHE40). A candidate is a lookup, not a
+  repair: write the current symbol (`SEPTIN2`, `MARCHF1`) [Bruford2020] once the source confirms
+  it; until then keep the field out of the scoring file and list it, with its candidates, as a
+  lookup to settle before scoring, because changing the collection later changes ssGSEA scores.
 
 ### 3. Bring symbols to current nomenclature for the right species
 
@@ -96,8 +97,10 @@ The procedure, the HGNC download and the alias table are in
 - Ambiguous symbols need the source: PD1 is an HGNC alias of PDCD1, SNCA and SPATA2; CD16 of
   FCGR3A and FCGR3B; CD25 of IL2RA and ISG20; DEC1 is the previous symbol of DELEC1 and an alias
   of BHLHE40 [HGNC2026]. Never take the first target.
-- Annotate the matrix and the GMT with the same HGNC version. Renaming only one side drops genes
-  silently; rerun coverage after renaming.
+- Annotate the matrix and the GMT with the same HGNC version; renaming one side drops genes
+  silently. After renaming, run `signature_overlap.py --universe` with the matrix's genes (or give
+  the user that command): a renamed gene in `dropped_by_universe` whose original symbol is in the
+  matrix means the matrix carries the older annotation; map both sides with one table.
 - Upper-casing a mouse symbol is not orthologue mapping. Map orthologues with a named resource
   and report unmapped genes, or use mouse-native sets, which MSigDB added because orthologue
   mapping is uncertain and orthologues can differ in function [Castanza2023].
@@ -105,9 +108,8 @@ The procedure, the HGNC download and the alias table are in
 
 ### 4. Know what size and coverage do to a score
 
-- Report for each set the number of genes and the number measured in the data
-  (`signature_overlap.py --universe` lists both; coverage rules for scoring are in
-  `tme-bulk-profiling`).
+- Report for each set the number of genes and the number measured in the data (`--universe` lists
+  both, step 3); coverage rules for scoring are in `tme-bulk-profiling`.
 - For the mean of k standardised genes with average pairwise correlation r, the variance of the
   score is [1 + (k - 1)r]/k (algebra; equal variances assumed). Small sets carry gene-specific
   noise; large sets track whatever program their genes share, which in bulk tumours is often
@@ -126,8 +128,7 @@ The procedure, the HGNC download and the alias table are in
 
 ### 5. Measure overlap and redundancy
 
-- Run `scripts/signature_overlap.py` on the collection with `--universe` set to the genes
-  measured in the data.
+- Run `scripts/signature_overlap.py` on every set, with `--universe` set to the measured genes.
 - `identical`, `nested`, `near_duplicate`: keep one, or keep both and say why; their scores agree
   partly by construction. In the tmelens library CYT (GZMA, PRF1) lies inside
   Danaher_Cytotoxic_cells (J = 0.2, OC = 1), and Immune_Checkpoints and T_cell_Exhaustion share
@@ -203,7 +204,7 @@ collection with the HGNC table date and MSigDB release.
 | Set learned from the data | `derived:<cohort>`; not evaluated on that cohort | heuristic |
 | Previous symbol or alias | Approved HGNC symbol; original kept in `original_symbols` | [HGNC2026] [Wang2026] |
 | Symbol HGNC links to several genes (PD1, CD16, CD25, DEC1) | Settle from the source paper; never the first target | [HGNC2026] |
-| Date, float or five-digit serial in a gene field | Error; recover from the original source | [Ziemann2016] [Abeysooriya2021] |
+| Date, float or five-digit serial in a gene field | Error; out of the scoring file until the source confirms a candidate | [Ziemann2016] [Abeysooriya2021]; hold-out: heuristic |
 | Case | Human upper case (C#orf# excepted); mouse upper-case initial, then lower case | [Bruford2020] [MGI2026] |
 | Human-style or mouse-style call in `gmt_lint.py` | At least 90% of symbols in that case | heuristic |
 | Size flags in `gmt_lint.py` | Below 10 (info), above 500 (warning): permissive ends of the recommended 10-15 and 200-500 bounds | [Reimand2019] |
@@ -232,9 +233,8 @@ collection with the HGNC table date and MSigDB release.
   laughter and of mouse social defeat predicted breast cancer outcome [Venet2011].
 - Selecting genes on all samples and cross-validating only the classifier [Ambroise2002].
 - Comparing ssGSEA scores from runs with different gene-set collections [Hanzelmann2013].
-- Renaming symbols in the GMT but not in the matrix, or the reverse: an older annotation (for
-  example CTGF instead of CCN2) silently drops the renamed genes. Map both sides with one HGNC
-  table and recheck coverage (step 3).
+- Renaming symbols in the GMT but not in the matrix, or the reverse: the renamed genes drop out
+  silently. Map both sides with one HGNC table and recheck coverage (step 3).
 
 ## Scripts
 

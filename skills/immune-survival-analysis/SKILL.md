@@ -14,7 +14,7 @@ description: >-
 license: MIT
 metadata:
   author: Alex Wang
-  version: "0.1.0"
+  version: "0.1.1"
   domain: tumor-immunology
   summary: Tests immune features against survival with continuous Cox models, sound endpoints, FDR and no cut-point fishing.
   summary-zh: 用连续Cox模型、合理终点与FDR检验免疫特征与生存的关联，不做截断值挖掘。
@@ -140,14 +140,19 @@ research use only, never a prognosis for an individual patient.
 8. **Show Kaplan-Meier curves from a prespecified split only.** Run km_logrank.py with
    `--split median` or `--split tertile`; show numbers at risk and do not interpret the tail
    beyond `last_time_with_10_at_risk` (heuristic). The log-rank p answers a cruder question than
-   the continuous HR and is secondary. Do not test a cut that was found by searching for the
-   largest log-rank statistic or smallest p-value (survminer `surv_cutpoint`, X-tile, a manual
-   scan) with an ordinary log-rank test [Altman1994]. If it has been done, run
-   cutpoint_inflation.py in permutation mode on the data for the search-adjusted p, run its
-   simulation mode with the cohort's n and censored fraction to quote the false-positive rate
-   of the search, and treat the cut as a hypothesis for an independent cohort. The maximally
-   selected rank statistic (R package maxstat) is an analytic alternative to the permutation
-   test [Lausen1992].
+   the continuous HR and is secondary. Whatever grouping the researcher asked to plot, the
+   figure you offer for the paper comes from the valid analysis (a prespecified split, or the
+   landmark groups of step 10); draw a requested invalid version only as a separate figure
+   titled exploratory or biased, because an unlabelled figure tends to end up in the paper. Do
+   not test a cut that was found by searching for the largest log-rank statistic or smallest
+   p-value (survminer `surv_cutpoint`, X-tile, a manual scan) with an ordinary log-rank test
+   [Altman1994]. If it has been done, run cutpoint_inflation.py in permutation mode on the data
+   for the search-adjusted p, run its simulation mode with the cohort's n and censored fraction
+   to quote the false-positive rate of the search, and treat the cut as a hypothesis for an
+   independent cohort. The maximally selected rank statistic (R package maxstat) is an analytic
+   alternative to the permutation test and a useful cross-check of it [Lausen1992]. To show the
+   researcher that the cut itself is not reproducible, repeat the same search in bootstrap
+   resamples of patients and report how widely the chosen cut moves (heuristic).
 
 9. **Control multiplicity across features.** The family is every feature x endpoint x model
    actually run, not the rows that will be shown; pass `--n-tests` to fdr_adjust.py when the
@@ -275,8 +280,9 @@ Primary result      HR per 1 SD (SD = x units) with 95% CI and p, unadjusted and
                     stage, age, purity; BH q over N tests.
 Checks              proportional hazards (test and plot), functional form, purity sensitivity,
                     stage positive control, cut-point search-adjusted p if a cut was searched.
-Display             Kaplan-Meier by prespecified median split: log-rank p, survival at fixed
-                    times with numbers at risk.
+Display             Kaplan-Meier by prespecified median split (landmark groups for a grouping
+                    defined after baseline): log-rank p, survival at fixed times with numbers
+                    at risk; any requested invalid figure labelled as such.
 Limits              retrospective, residual confounding, one cohort, endpoint caveats,
                     association not causation, not for individual prognosis; what was not
                     checked.
